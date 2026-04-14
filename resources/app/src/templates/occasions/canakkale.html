@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0D1520;
+    position: relative;
+  }
+
+  /* Dark gradient overlay */
+  .bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(180,30,30,0.15) 0%, transparent 60%),
+                linear-gradient(180deg, #0D1520 0%, #1B2A4A 50%, #0D1520 100%);
+    z-index: 1;
+  }
+
+  /* Subtle flag stripe - red */
+  .flag-stripe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, transparent 10%, #E30A17 30%, #E30A17 70%, transparent 90%);
+    z-index: 5;
+  }
+
+  .flag-stripe-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, transparent 10%, #E30A17 30%, #E30A17 70%, transparent 90%);
+    z-index: 5;
+  }
+
+  /* Crescent and star - CSS only */
+  .crescent-container {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    opacity: 0.12;
+  }
+  .crescent-outer {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #E30A17;
+    position: relative;
+  }
+  .crescent-inner {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: #0D1520;
+    position: absolute;
+    top: 20px;
+    left: 50px;
+  }
+  .star-shape {
+    position: absolute;
+    top: 70px;
+    left: 140px;
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 18px solid #E30A17;
+  }
+  .star-shape::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -25px;
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-top: 18px solid #E30A17;
+  }
+
+  /* Vertical decorative lines */
+  .deco-line-left {
+    position: absolute;
+    left: 60px;
+    top: 120px;
+    bottom: 240px;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(197,163,85,0.3), transparent);
+    z-index: 3;
+  }
+  .deco-line-right {
+    position: absolute;
+    right: 60px;
+    top: 120px;
+    bottom: 240px;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(197,163,85,0.3), transparent);
+    z-index: 3;
+  }
+
+  /* Content */
+  .content {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-top {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+  }
+  .logo-top img {
+    height: 70px;
+    object-fit: contain;
+  }
+
+  .date-badge {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #C5A355;
+    margin-bottom: 30px;
+  }
+
+  .main-quote {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 72px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+
+  .quote-accent {
+    width: 80px;
+    height: 3px;
+    background: #E30A17;
+    margin: 25px auto;
+  }
+
+  .occasion-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 28px;
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    line-height: 1.5;
+    max-width: 700px;
+    margin-bottom: 10px;
+  }
+
+  .occasion-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    letter-spacing: 3px;
+    margin-top: 10px;
+  }
+
+  /* Geometric corner accents */
+  .corner-tl, .corner-tr, .corner-bl, .corner-br {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    z-index: 5;
+  }
+  .corner-tl {
+    top: 30px; left: 30px;
+    border-top: 2px solid rgba(197,163,85,0.4);
+    border-left: 2px solid rgba(197,163,85,0.4);
+  }
+  .corner-tr {
+    top: 30px; right: 30px;
+    border-top: 2px solid rgba(197,163,85,0.4);
+    border-right: 2px solid rgba(197,163,85,0.4);
+  }
+  .corner-bl {
+    bottom: 200px; left: 30px;
+    border-bottom: 2px solid rgba(197,163,85,0.4);
+    border-left: 2px solid rgba(197,163,85,0.4);
+  }
+  .corner-br {
+    bottom: 200px; right: 30px;
+    border-bottom: 2px solid rgba(197,163,85,0.4);
+    border-right: 2px solid rgba(197,163,85,0.4);
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    background: linear-gradient(180deg, transparent 0%, rgba(13,21,32,0.95) 30%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 6;
+  }
+
+  .agent-photo-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #C5A355;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .agent-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .agent-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+  .agent-phone {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #C5A355;
+  }
+  .agent-company {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-overlay"></div>
+  <div class="flag-stripe"></div>
+  <div class="flag-stripe-bottom"></div>
+
+  <div class="crescent-container">
+    <div class="crescent-outer">
+      <div class="crescent-inner"></div>
+    </div>
+    <div class="star-shape"></div>
+  </div>
+
+  <div class="deco-line-left"></div>
+  <div class="deco-line-right"></div>
+
+  <div class="corner-tl"></div>
+  <div class="corner-tr"></div>
+  <div class="corner-bl"></div>
+  <div class="corner-br"></div>
+
+  <div class="content">
+    <div class="logo-top">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+
+    <div class="date-badge">18 Mart</div>
+
+    <div class="main-quote">Canakkale<br>Gecilmez!</div>
+
+    <div class="quote-accent"></div>
+
+    <div class="occasion-title">Canakkale Zaferi ve<br>Sehitleri Anma Gunu</div>
+
+    <div class="occasion-subtitle">Sehitlerimizi Saygi ve Minnetle Aniyoruz</div>
+  </div>
+
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-info">
+      <div class="agent-name" data-field="agentName">Ad Soyad</div>
+      <div class="agent-phone" data-field="agentPhone">0500 000 00 00</div>
+      <div class="agent-company">Ozgu Invest Gayrimenkul</div>
+    </div>
+  </div>
+</body>
+</html>

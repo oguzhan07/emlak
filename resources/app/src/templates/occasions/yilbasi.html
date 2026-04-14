@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>1 Ocak - Yilbasi</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #1B2A4A;
+    position: relative;
+  }
+
+  /* Deep navy gradient */
+  .bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(170deg, #0f1b33 0%, #1B2A4A 40%, #162242 70%, #0f1b33 100%);
+  }
+
+  /* Sparkle/shimmer overlay */
+  .shimmer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background:
+      radial-gradient(1px 1px at 100px 150px, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 300px 250px, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 500px 100px, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 700px 300px, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 900px 180px, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 150px 400px, rgba(197,163,85,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 400px 500px, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 800px 450px, rgba(197,163,85,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 250px 600px, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 650px 550px, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 950px 500px, rgba(197,163,85,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50px 700px, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 550px 680px, rgba(197,163,85,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 1000px 650px, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 200px 80px, rgba(197,163,85,0.6) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 780px 120px, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 450px 350px, rgba(197,163,85,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 850px 600px, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 120px 520px, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 720px 420px, rgba(197,163,85,0.35) 0%, transparent 100%);
+  }
+
+  /* Snowflake CSS shapes */
+  .snowflake {
+    position: absolute;
+    width: 2px;
+    background: rgba(255,255,255,0.15);
+  }
+  .snowflake::before, .snowflake::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    left: 50%;
+    top: 50%;
+  }
+  .snowflake::before { transform: translate(-50%,-50%) rotate(60deg); }
+  .snowflake::after { transform: translate(-50%,-50%) rotate(-60deg); }
+
+  .sf-1 { height: 60px; top: 80px; left: 120px; transform: rotate(15deg); opacity: 0.5; }
+  .sf-2 { height: 45px; top: 150px; right: 180px; transform: rotate(-10deg); opacity: 0.35; }
+  .sf-3 { height: 55px; top: 300px; left: 80px; transform: rotate(25deg); opacity: 0.3; }
+  .sf-4 { height: 35px; top: 200px; right: 100px; transform: rotate(5deg); opacity: 0.4; }
+  .sf-5 { height: 50px; bottom: 350px; right: 150px; transform: rotate(-20deg); opacity: 0.25; }
+  .sf-6 { height: 40px; top: 450px; left: 200px; transform: rotate(35deg); opacity: 0.3; }
+  .sf-7 { height: 30px; bottom: 400px; left: 150px; transform: rotate(-8deg); opacity: 0.35; }
+  .sf-8 { height: 48px; top: 100px; left: 500px; transform: rotate(18deg); opacity: 0.2; }
+
+  /* Large gold glow */
+  .gold-glow {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(197,163,85,0.08) 0%, transparent 60%);
+    border-radius: 50%;
+  }
+
+  /* Geometric gold ring */
+  .gold-ring {
+    position: absolute;
+    top: 250px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 320px;
+    border: 1px solid rgba(197,163,85,0.15);
+    border-radius: 50%;
+  }
+  .gold-ring-2 {
+    position: absolute;
+    top: 270px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 280px;
+    border: 1px solid rgba(197,163,85,0.1);
+    border-radius: 50%;
+  }
+
+  /* Decorative gold diamonds */
+  .diamond {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #C5A355;
+    transform: rotate(45deg);
+  }
+  .diamond-1 { top: 180px; left: 50%; margin-left: -6px; opacity: 0.2; }
+  .diamond-2 { top: 330px; left: 150px; opacity: 0.12; width: 8px; height: 8px; }
+  .diamond-3 { top: 280px; right: 160px; opacity: 0.15; width: 10px; height: 10px; }
+
+  /* Logo */
+  .logo-area {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 50px;
+  }
+  .logo-area img {
+    height: 100%;
+    width: auto;
+    opacity: 0.85;
+  }
+
+  /* Year display */
+  .year-display {
+    position: absolute;
+    top: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 140px;
+    font-weight: 700;
+    color: rgba(197,163,85,0.08);
+    letter-spacing: 10px;
+    line-height: 1;
+  }
+
+  /* Main text */
+  .main-text {
+    position: absolute;
+    top: 320px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 800px;
+    z-index: 2;
+  }
+  .main-text .pre {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #C5A355;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+  .main-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 4px;
+    line-height: 1.1;
+  }
+  .main-text h1 .gold {
+    color: #C5A355;
+    display: block;
+    font-size: 72px;
+  }
+  .main-text .year {
+    font-family: 'Inter', sans-serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 16px;
+    margin-top: 20px;
+  }
+
+  /* Gold divider */
+  .divider {
+    position: absolute;
+    top: 620px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .divider-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #C5A355);
+  }
+  .divider-line:last-child {
+    background: linear-gradient(90deg, #C5A355, transparent);
+  }
+  .divider-diamond {
+    width: 6px;
+    height: 6px;
+    background: #C5A355;
+    transform: rotate(45deg);
+    opacity: 0.6;
+  }
+
+  /* Subtitle */
+  .subtitle {
+    position: absolute;
+    top: 660px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 700px;
+  }
+  .subtitle p {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+    line-height: 1.6;
+  }
+
+  /* Bottom gold line */
+  .bottom-line {
+    position: absolute;
+    bottom: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197,163,85,0.3), transparent);
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 175px;
+    background: linear-gradient(180deg, transparent 0%, rgba(8,14,28,0.85) 40%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding-top: 15px;
+  }
+  .agent-photo-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #C5A355;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .agent-info {
+    text-align: left;
+  }
+  .agent-info .name {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 1px;
+  }
+  .agent-info .phone {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+  .logo-bottom {
+    position: absolute;
+    bottom: 38px;
+    right: 55px;
+    height: 36px;
+  }
+  .logo-bottom img {
+    height: 100%;
+    width: auto;
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="shimmer"></div>
+  <div class="gold-glow"></div>
+
+  <!-- Snowflakes -->
+  <div class="snowflake sf-1"></div>
+  <div class="snowflake sf-2"></div>
+  <div class="snowflake sf-3"></div>
+  <div class="snowflake sf-4"></div>
+  <div class="snowflake sf-5"></div>
+  <div class="snowflake sf-6"></div>
+  <div class="snowflake sf-7"></div>
+  <div class="snowflake sf-8"></div>
+
+  <!-- Gold rings -->
+  <div class="gold-ring"></div>
+  <div class="gold-ring-2"></div>
+
+  <!-- Diamonds -->
+  <div class="diamond diamond-1"></div>
+  <div class="diamond diamond-2"></div>
+  <div class="diamond diamond-3"></div>
+
+  <!-- Logo -->
+  <div class="logo-area">
+    <img data-field="logo" src="" alt="Logo">
+  </div>
+
+  <!-- Year watermark -->
+  <div class="year-display">2026</div>
+
+  <!-- Main text -->
+  <div class="main-text">
+    <div class="pre">Yeni Yil</div>
+    <h1>Mutlu<br><span class="gold">Yillar</span></h1>
+    <div class="year">2026</div>
+  </div>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-diamond"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Subtitle -->
+  <div class="subtitle">
+    <p>Yeni yiliniz saglik, mutluluk ve<br>basarilarla dolu olsun</p>
+  </div>
+
+  <div class="bottom-line"></div>
+
+  <!-- Agent section -->
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-info">
+      <div class="name" data-field="agentName"></div>
+      <div class="phone" data-field="agentPhone"></div>
+    </div>
+    <div class="logo-bottom">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+  </div>
+</body>
+</html>

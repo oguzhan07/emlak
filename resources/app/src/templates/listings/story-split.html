@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1920px;font-family:'Inter',sans-serif;overflow:hidden;background:#F7F5F0;display:flex;flex-direction:column}
+
+.header{height:100px;background:#1B2A4A;padding:0 44px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.logo{height:44px}
+.header-right{display:flex;align-items:center;gap:12px}
+.badge{padding:8px 20px;font-size:12px;font-weight:800;letter-spacing:2px;background:#C5A355;color:#1B2A4A;border-radius:4px}
+
+.hero-img{height:480px;background-size:cover;background-position:center;position:relative;flex-shrink:0}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(247,245,240,0.8) 100%)}
+
+.info-section{padding:36px 48px;flex-shrink:0}
+.prop-type{font-size:11px;font-weight:700;color:#C5A355;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#1B2A4A;line-height:1.2;margin-bottom:10px}
+.location{font-size:13px;color:#8899AA;margin-bottom:20px}
+.price{font-size:42px;font-weight:800;color:#1B2A4A;margin-bottom:24px}
+
+.features-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.feat{padding:10px 18px;background:white;border:1.5px solid #E4E7EC;border-radius:10px;font-size:13px;font-weight:600;color:#1B2A4A;box-shadow:0 2px 6px rgba(0,0,0,0.04)}
+
+.small-gallery{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:0 48px;flex-shrink:0}
+.sm-img{height:180px;background-size:cover;background-position:center;border-radius:10px}
+
+.spacer{flex:1}
+
+.footer{height:120px;background:#1B2A4A;padding:0 48px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.agent{display:flex;align-items:center;gap:16px}
+.agent-photo{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2.5px solid #C5A355}
+.agent-name{font-size:16px;font-weight:700;color:white}
+.agent-phone{font-size:13px;color:#C5A355}
+.agent-label{font-size:10px;color:#8899AA;text-transform:uppercase;letter-spacing:1px}
+.footer-logo{height:40px}
+</style></head>
+<body>
+  <div class="header">
+    <img class="logo" data-field="logo" src="">
+    <div class="header-right">
+      <div class="badge" data-field="listingType">SATILIK</div>
+    </div>
+  </div>
+
+  <div class="hero-img" data-bg="primaryImage">
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="info-section">
+    <div class="prop-type" data-field="propertyType">Daire</div>
+    <div class="title" data-field="title">İlan Başlığı Buraya Gelecek</div>
+    <div class="location" data-field="location">Konum bilgisi</div>
+    <div class="price" data-field="price">0 TL</div>
+    <div class="features-row" data-features></div>
+  </div>
+
+  <div class="small-gallery">
+    <div class="sm-img" data-image-index="1"></div>
+    <div class="sm-img" data-image-index="2"></div>
+    <div class="sm-img" data-image-index="3"></div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="footer">
+    <div class="agent">
+      <img class="agent-photo" data-field="agentPhoto" src="">
+      <div>
+        <div class="agent-label">Emlak Danışmanı</div>
+        <div class="agent-name" data-field="agentName">İsim Soyisim</div>
+        <div class="agent-phone" data-field="agentPhone">+90 5XX</div>
+      </div>
+    </div>
+    <img class="footer-logo" data-field="logo" src="">
+  </div>
+</body></html>

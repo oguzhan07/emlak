@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #E30A17;
+    position: relative;
+  }
+
+  /* Grand radial glow */
+  .bg-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 45%, rgba(255,255,255,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(27,42,74,0.3) 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba(27,42,74,0.2) 0%, transparent 40%);
+    z-index: 1;
+  }
+
+  /* Large crescent and star - prominent flag */
+  .flag-element {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    z-index: 2;
+    opacity: 0.1;
+  }
+  .crescent-outer {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    position: relative;
+  }
+  .crescent-inner {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: #E30A17;
+    position: absolute;
+    top: 40px;
+    left: 100px;
+  }
+  .flag-star {
+    position: absolute;
+    top: 145px;
+    left: 300px;
+  }
+  .flag-star::before {
+    content: '';
+    display: block;
+    width: 0; height: 0;
+    border-left: 45px solid transparent;
+    border-right: 45px solid transparent;
+    border-bottom: 33px solid #FFFFFF;
+  }
+  .flag-star::after {
+    content: '';
+    display: block;
+    width: 0; height: 0;
+    border-left: 45px solid transparent;
+    border-right: 45px solid transparent;
+    border-top: 33px solid #FFFFFF;
+    margin-top: -12px;
+  }
+
+  /* Top navy bar */
+  .navy-bar-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: #1B2A4A;
+    z-index: 5;
+  }
+
+  /* Bottom navy section */
+  .navy-base {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 260px;
+    background: #1B2A4A;
+    clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 100%);
+    z-index: 3;
+  }
+
+  /* Gold border frame */
+  .gold-frame {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 220px;
+    border: 1px solid rgba(197,163,85,0.25);
+    z-index: 4;
+  }
+  .gold-frame::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 1px solid rgba(197,163,85,0.12);
+  }
+
+  /* Corner ornaments */
+  .ornament {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    z-index: 5;
+  }
+  .orn-tl {
+    top: 32px; left: 32px;
+    border-top: 3px solid #C5A355;
+    border-left: 3px solid #C5A355;
+  }
+  .orn-tr {
+    top: 32px; right: 32px;
+    border-top: 3px solid #C5A355;
+    border-right: 3px solid #C5A355;
+  }
+  .orn-bl {
+    bottom: 228px; left: 32px;
+    border-bottom: 3px solid #C5A355;
+    border-left: 3px solid #C5A355;
+  }
+  .orn-br {
+    bottom: 228px; right: 32px;
+    border-bottom: 3px solid #C5A355;
+    border-right: 3px solid #C5A355;
+  }
+
+  /* Decorative diamond shapes */
+  .diamond {
+    position: absolute;
+    z-index: 4;
+    transform: rotate(45deg);
+  }
+  .diamond-1 {
+    top: 120px;
+    left: 100px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .diamond-2 {
+    top: 160px;
+    right: 120px;
+    width: 15px;
+    height: 15px;
+    background: rgba(197,163,85,0.2);
+  }
+  .diamond-3 {
+    bottom: 340px;
+    left: 150px;
+    width: 12px;
+    height: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .content {
+    position: relative;
+    z-index: 6;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 80px;
+  }
+
+  .logo-top {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 7;
+  }
+  .logo-top img {
+    height: 70px;
+    object-fit: contain;
+  }
+
+  .date-badge {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .date-badge-line {
+    width: 50px;
+    height: 2px;
+    background: rgba(255,255,255,0.4);
+  }
+  .date-badge-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+  }
+
+  .main-date {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 120px;
+    color: #FFFFFF;
+    line-height: 1;
+    text-shadow: 0 4px 25px rgba(0,0,0,0.2);
+  }
+
+  .ekim-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 44px;
+    color: #FFFFFF;
+    letter-spacing: 16px;
+    text-transform: uppercase;
+    margin-top: -5px;
+    margin-bottom: 20px;
+  }
+
+  .gold-line {
+    width: 140px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #C5A355, transparent);
+    margin-bottom: 25px;
+  }
+
+  .republic-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 52px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 1.2;
+    text-shadow: 0 2px 15px rgba(0,0,0,0.2);
+    margin-bottom: 15px;
+  }
+
+  .republic-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 32px;
+    color: #C5A355;
+    text-align: center;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    margin-bottom: 15px;
+  }
+
+  .age-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+  }
+
+  /* Agent section on navy */
+  .agent-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 7;
+  }
+
+  .agent-photo-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #C5A355;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .agent-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .agent-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+  .agent-phone {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #C5A355;
+  }
+  .agent-company {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="navy-bar-top"></div>
+
+  <div class="flag-element">
+    <div class="crescent-outer">
+      <div class="crescent-inner"></div>
+    </div>
+    <div class="flag-star"></div>
+  </div>
+
+  <div class="gold-frame"></div>
+  <div class="ornament orn-tl"></div>
+  <div class="ornament orn-tr"></div>
+  <div class="ornament orn-bl"></div>
+  <div class="ornament orn-br"></div>
+
+  <div class="diamond diamond-1"></div>
+  <div class="diamond diamond-2"></div>
+  <div class="diamond diamond-3"></div>
+
+  <div class="navy-base"></div>
+
+  <div class="content">
+    <div class="logo-top">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+
+    <div class="date-badge">
+      <div class="date-badge-line"></div>
+      <div class="date-badge-text">Cumhuriyet Bayrami</div>
+      <div class="date-badge-line"></div>
+    </div>
+
+    <div class="main-date">29</div>
+    <div class="ekim-text">Ekim</div>
+
+    <div class="gold-line"></div>
+
+    <div class="republic-title">Cumhuriyet<br>Bayrami</div>
+
+    <div class="republic-subtitle">Kutlu Olsun!</div>
+
+    <div class="age-text">Cumhuriyet 103 Yasinda</div>
+  </div>
+
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-info">
+      <div class="agent-name" data-field="agentName">Ad Soyad</div>
+      <div class="agent-phone" data-field="agentPhone">0500 000 00 00</div>
+      <div class="agent-company">Ozgu Invest Gayrimenkul</div>
+    </div>
+  </div>
+</body>
+</html>

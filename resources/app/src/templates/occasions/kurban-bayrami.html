@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0E1B33;
+    position: relative;
+  }
+
+  /* Background gradients */
+  .bg-base {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(180deg, #1B2A4A 0%, #0E1B33 50%, #0A1628 100%);
+    z-index: 0;
+  }
+  .bg-emerald {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at 30% 60%, rgba(16,82,67,0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 30%, rgba(197,163,85,0.06) 0%, transparent 40%);
+    z-index: 1;
+  }
+
+  /* Islamic geometric pattern - interlocking octagons */
+  .geo-pattern {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2;
+    overflow: hidden;
+  }
+  .octagon {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border: 1px solid rgba(197,163,85,0.06);
+    transform: rotate(22.5deg);
+    border-radius: 8px;
+  }
+  .octagon::after {
+    content: '';
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border: 1px solid rgba(16,82,67,0.08);
+    border-radius: 4px;
+    transform: rotate(22.5deg);
+  }
+
+  /* Mosque dome silhouette */
+  .mosque {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    width: 400px;
+    height: 260px;
+  }
+  /* Main dome */
+  .mosque-dome {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 140px;
+    border-radius: 110px 110px 0 0;
+    background: linear-gradient(180deg, rgba(197,163,85,0.12) 0%, rgba(197,163,85,0.04) 100%);
+    border: 1px solid rgba(197,163,85,0.15);
+    border-bottom: none;
+  }
+  /* Dome tip - finial */
+  .mosque-finial {
+    position: absolute;
+    bottom: 138px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 30px;
+    background: #C5A355;
+    opacity: 0.4;
+  }
+  .mosque-finial::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #C5A355;
+    opacity: 0.5;
+  }
+  /* Left minaret */
+  .minaret-left {
+    position: absolute;
+    bottom: 0;
+    left: 40px;
+    width: 22px;
+    height: 200px;
+    background: linear-gradient(180deg, rgba(197,163,85,0.1), rgba(197,163,85,0.04));
+    border: 1px solid rgba(197,163,85,0.1);
+    border-bottom: none;
+  }
+  .minaret-left::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -4px;
+    width: 30px;
+    height: 20px;
+    border-radius: 15px 15px 0 0;
+    background: rgba(197,163,85,0.08);
+    border: 1px solid rgba(197,163,85,0.12);
+    border-bottom: none;
+  }
+  .minaret-left::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 7px;
+    width: 3px;
+    height: 22px;
+    background: #C5A355;
+    opacity: 0.3;
+  }
+  /* Right minaret */
+  .minaret-right {
+    position: absolute;
+    bottom: 0;
+    right: 40px;
+    width: 22px;
+    height: 200px;
+    background: linear-gradient(180deg, rgba(197,163,85,0.1), rgba(197,163,85,0.04));
+    border: 1px solid rgba(197,163,85,0.1);
+    border-bottom: none;
+  }
+  .minaret-right::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -4px;
+    width: 30px;
+    height: 20px;
+    border-radius: 15px 15px 0 0;
+    background: rgba(197,163,85,0.08);
+    border: 1px solid rgba(197,163,85,0.12);
+    border-bottom: none;
+  }
+  .minaret-right::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 7px;
+    width: 3px;
+    height: 22px;
+    background: #C5A355;
+    opacity: 0.3;
+  }
+  /* Side domes */
+  .side-dome-left {
+    position: absolute;
+    bottom: 0;
+    left: 75px;
+    width: 100px;
+    height: 60px;
+    border-radius: 50px 50px 0 0;
+    background: rgba(197,163,85,0.06);
+    border: 1px solid rgba(197,163,85,0.1);
+    border-bottom: none;
+  }
+  .side-dome-right {
+    position: absolute;
+    bottom: 0;
+    right: 75px;
+    width: 100px;
+    height: 60px;
+    border-radius: 50px 50px 0 0;
+    background: rgba(197,163,85,0.06);
+    border: 1px solid rgba(197,163,85,0.1);
+    border-bottom: none;
+  }
+  /* Mosque base line */
+  .mosque-base {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197,163,85,0.2), transparent);
+  }
+
+  /* Emerald accent lines */
+  .emerald-accent {
+    position: absolute;
+    z-index: 3;
+  }
+  .emerald-line-l {
+    top: 400px;
+    left: 40px;
+    width: 3px;
+    height: 120px;
+    background: linear-gradient(180deg, transparent, rgba(16,82,67,0.3), transparent);
+  }
+  .emerald-line-r {
+    top: 380px;
+    right: 40px;
+    width: 3px;
+    height: 120px;
+    background: linear-gradient(180deg, transparent, rgba(16,82,67,0.3), transparent);
+  }
+
+  /* Border frame */
+  .frame {
+    position: absolute;
+    top: 35px; left: 35px; right: 35px; bottom: 35px;
+    border: 1px solid rgba(197,163,85,0.1);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Content */
+  .content {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+  }
+
+  /* Logo */
+  .logo-container {
+    position: absolute;
+    top: 55px;
+    left: 60px;
+  }
+  .logo-container img {
+    height: 55px;
+    object-fit: contain;
+  }
+
+  /* Message area */
+  .message-area {
+    text-align: center;
+    margin-top: 120px;
+  }
+
+  .decorative-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  .deco-line {
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197,163,85,0.35), transparent);
+  }
+  .deco-star {
+    width: 12px;
+    height: 12px;
+    background: #C5A355;
+    transform: rotate(45deg);
+    opacity: 0.4;
+  }
+
+  .main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 62px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+  }
+  .main-title span { display: block; }
+
+  .title-gold {
+    color: #C5A355;
+    font-size: 56px;
+  }
+
+  .emerald-bar {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #C5A355, #105243, #C5A355);
+    margin: 28px auto;
+    border-radius: 2px;
+  }
+
+  .sub-message {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .bottom-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .bo-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #C5A355;
+    opacity: 0.25;
+  }
+  .bo-dot-mid {
+    width: 6px;
+    height: 6px;
+    background: #C5A355;
+    transform: rotate(45deg);
+    opacity: 0.3;
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 55px;
+    left: 0; right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .agent-photo-wrapper {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, #C5A355, #105243, #C5A355);
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid #0E1B33;
+  }
+
+  .agent-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+  }
+
+  .agent-phone {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-base"></div>
+  <div class="bg-emerald"></div>
+
+  <!-- Islamic geometric pattern -->
+  <div class="geo-pattern">
+    <div class="octagon" style="top:0;left:0"></div>
+    <div class="octagon" style="top:0;left:200px"></div>
+    <div class="octagon" style="top:0;left:400px"></div>
+    <div class="octagon" style="top:0;left:600px"></div>
+    <div class="octagon" style="top:0;left:800px"></div>
+    <div class="octagon" style="top:0;left:1000px"></div>
+    <div class="octagon" style="top:900px;left:100px"></div>
+    <div class="octagon" style="top:900px;left:300px"></div>
+    <div class="octagon" style="top:900px;left:500px"></div>
+    <div class="octagon" style="top:900px;left:700px"></div>
+    <div class="octagon" style="top:900px;left:900px"></div>
+  </div>
+
+  <!-- Mosque silhouette -->
+  <div class="mosque">
+    <div class="minaret-left"></div>
+    <div class="minaret-right"></div>
+    <div class="side-dome-left"></div>
+    <div class="side-dome-right"></div>
+    <div class="mosque-dome"></div>
+    <div class="mosque-finial"></div>
+    <div class="mosque-base"></div>
+  </div>
+
+  <!-- Emerald accents -->
+  <div class="emerald-accent emerald-line-l"></div>
+  <div class="emerald-accent emerald-line-r"></div>
+
+  <!-- Border frame -->
+  <div class="frame"></div>
+
+  <div class="content">
+    <div class="logo-container">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+
+    <div class="message-area">
+      <div class="decorative-top">
+        <div class="deco-line"></div>
+        <div class="deco-star"></div>
+        <div class="deco-line"></div>
+      </div>
+      <h1 class="main-title">
+        <span>Kurban Bayraminiz</span>
+        <span class="title-gold">M&#252;barek Olsun</span>
+      </h1>
+      <div class="emerald-bar"></div>
+      <p class="sub-message">Huzur ve bereket dolu bayramlar</p>
+      <div class="bottom-ornament">
+        <div class="bo-dot"></div>
+        <div class="bo-dot"></div>
+        <div class="bo-dot-mid"></div>
+        <div class="bo-dot"></div>
+        <div class="bo-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agent section -->
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-name" data-field="agentName"></div>
+    <div class="agent-phone" data-field="agentPhone"></div>
+  </div>
+</body>
+</html>

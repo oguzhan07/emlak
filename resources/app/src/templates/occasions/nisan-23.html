@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #FFFFFF;
+    position: relative;
+  }
+
+  /* Festive background */
+  .bg-pattern {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(227,10,23,0.06) 0%, transparent 40%),
+      radial-gradient(circle at 85% 15%, rgba(27,42,74,0.06) 0%, transparent 40%),
+      radial-gradient(circle at 50% 80%, rgba(197,163,85,0.05) 0%, transparent 40%);
+    z-index: 1;
+  }
+
+  /* Top red banner */
+  .top-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: linear-gradient(135deg, #E30A17 0%, #C80815 50%, #1B2A4A 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+    z-index: 2;
+  }
+
+  /* Decorative circles - balloons abstraction */
+  .circle-deco {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 3;
+  }
+  .circle-1 {
+    width: 80px; height: 80px;
+    background: rgba(227,10,23,0.12);
+    top: 320px; left: 80px;
+  }
+  .circle-2 {
+    width: 50px; height: 50px;
+    background: rgba(27,42,74,0.10);
+    top: 280px; right: 120px;
+  }
+  .circle-3 {
+    width: 35px; height: 35px;
+    background: rgba(197,163,85,0.15);
+    top: 370px; right: 80px;
+  }
+  .circle-4 {
+    width: 60px; height: 60px;
+    background: rgba(227,10,23,0.08);
+    top: 350px; left: 200px;
+  }
+  .circle-5 {
+    width: 25px; height: 25px;
+    background: rgba(27,42,74,0.12);
+    top: 310px; left: 350px;
+  }
+
+  /* Confetti-like shapes */
+  .confetti {
+    position: absolute;
+    z-index: 3;
+  }
+  .confetti-1 {
+    width: 12px; height: 40px;
+    background: #E30A17;
+    opacity: 0.15;
+    top: 400px; left: 60px;
+    transform: rotate(25deg);
+    border-radius: 6px;
+  }
+  .confetti-2 {
+    width: 12px; height: 30px;
+    background: #1B2A4A;
+    opacity: 0.12;
+    top: 380px; right: 150px;
+    transform: rotate(-35deg);
+    border-radius: 6px;
+  }
+  .confetti-3 {
+    width: 10px; height: 35px;
+    background: #C5A355;
+    opacity: 0.15;
+    top: 420px; right: 60px;
+    transform: rotate(50deg);
+    border-radius: 6px;
+  }
+  .confetti-4 {
+    width: 15px; height: 15px;
+    background: #E30A17;
+    opacity: 0.10;
+    top: 440px; left: 300px;
+    transform: rotate(45deg);
+  }
+  .confetti-5 {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #C5A355;
+    opacity: 0.2;
+    top: 360px; left: 500px;
+  }
+
+  /* Star decorations for children theme */
+  .star-deco {
+    position: absolute;
+    z-index: 3;
+  }
+  .star-deco::before {
+    content: '';
+    display: block;
+    width: 0; height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 9px solid currentColor;
+  }
+  .star-deco::after {
+    content: '';
+    display: block;
+    width: 0; height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 9px solid currentColor;
+    margin-top: -3px;
+  }
+  .star-d1 { top: 340px; left: 450px; color: rgba(197,163,85,0.25); }
+  .star-d2 { top: 390px; right: 250px; color: rgba(227,10,23,0.15); transform: scale(0.7); }
+
+  .content {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo-top {
+    position: absolute;
+    top: 35px;
+    right: 45px;
+    z-index: 5;
+  }
+  .logo-top img {
+    height: 60px;
+    object-fit: contain;
+  }
+
+  .date-section {
+    margin-top: 60px;
+    text-align: center;
+  }
+  .date-number {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 100px;
+    color: #FFFFFF;
+    line-height: 1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+  .date-month {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+  }
+
+  .main-title {
+    margin-top: 160px;
+    text-align: center;
+  }
+  .title-line1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 24px;
+    color: #1B2A4A;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  .title-line2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 56px;
+    color: #E30A17;
+    line-height: 1.2;
+    margin-top: 8px;
+  }
+  .title-line3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 56px;
+    color: #1B2A4A;
+    line-height: 1.2;
+  }
+
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: #C5A355;
+    margin: 30px auto;
+  }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: #1B2A4A;
+    text-align: center;
+    line-height: 1.6;
+    max-width: 650px;
+    opacity: 0.7;
+  }
+
+  .message {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #E30A17;
+    text-align: center;
+    margin-top: 25px;
+    font-style: italic;
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    background: linear-gradient(180deg, transparent 0%, #1B2A4A 40%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 6;
+  }
+
+  .agent-photo-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #C5A355;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .agent-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .agent-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+  .agent-phone {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #C5A355;
+  }
+  .agent-company {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+  <div class="top-banner"></div>
+
+  <div class="circle-deco circle-1"></div>
+  <div class="circle-deco circle-2"></div>
+  <div class="circle-deco circle-3"></div>
+  <div class="circle-deco circle-4"></div>
+  <div class="circle-deco circle-5"></div>
+
+  <div class="confetti confetti-1"></div>
+  <div class="confetti confetti-2"></div>
+  <div class="confetti confetti-3"></div>
+  <div class="confetti confetti-4"></div>
+  <div class="confetti confetti-5"></div>
+
+  <div class="star-deco star-d1"></div>
+  <div class="star-deco star-d2"></div>
+
+  <div class="content">
+    <div class="logo-top">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+
+    <div class="date-section">
+      <div class="date-number">23</div>
+      <div class="date-month">Nisan</div>
+    </div>
+
+    <div class="main-title">
+      <div class="title-line1">Ulusal Egemenlik ve</div>
+      <div class="title-line2">Cocuk</div>
+      <div class="title-line3">Bayrami</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="subtitle">Cocuklarimizin gozlerindeki isik,<br>gelecegimizin en buyuk umududur.</div>
+
+    <div class="message">Kutlu Olsun!</div>
+  </div>
+
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-info">
+      <div class="agent-name" data-field="agentName">Ad Soyad</div>
+      <div class="agent-phone" data-field="agentPhone">0500 000 00 00</div>
+      <div class="agent-company">Ozgu Invest Gayrimenkul</div>
+    </div>
+  </div>
+</body>
+</html>

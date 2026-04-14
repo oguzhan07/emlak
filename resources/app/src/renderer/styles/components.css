@@ -1,0 +1,87 @@
+.btn {
+  padding: 10px var(--space-5);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-spring);
+  letter-spacing: -0.011em;
+  position: relative;
+}
+.btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: var(--text-inverse);
+  border-color: transparent;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(27, 42, 74, 0.2);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--navy-light), var(--navy));
+  border-color: transparent;
+  color: var(--text-inverse);
+  box-shadow: 0 8px 24px rgba(27, 42, 74, 0.3);
+}
+
+.btn-danger {
+  background: var(--bg-surface);
+  color: var(--red);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+.btn-danger:hover {
+  background: var(--red-light);
+  border-color: var(--red);
+}
+
+.btn-small {
+  padding: 8px var(--space-4);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-default);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-spring);
+}
+.btn-small:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+.btn-small:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: none;
+}
+.btn-small.btn-primary {
+  background: var(--navy);
+  color: var(--text-inverse);
+  border-color: transparent;
+}
+.btn-small.btn-primary:hover {
+  background: var(--navy-light);
+}
+
+.btn-block {
+  width: 100%;
+}

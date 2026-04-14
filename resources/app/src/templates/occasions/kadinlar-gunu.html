@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>8 Mart - Dunya Kadinlar Gunu</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #1B2A4A;
+    position: relative;
+  }
+
+  /* Purple/navy gradient background */
+  .bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(155deg, #1B2A4A 0%, #2a2650 25%, #3d2d5e 50%, #2a2650 75%, #1B2A4A 100%);
+  }
+
+  /* Soft purple glow */
+  .glow-purple {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(120, 80, 160, 0.1) 0%, transparent 65%);
+    border-radius: 50%;
+  }
+  .glow-gold {
+    position: absolute;
+    bottom: 200px;
+    right: -50px;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(197, 163, 85, 0.06) 0%, transparent 60%);
+    border-radius: 50%;
+  }
+
+  /* Floral CSS decorations - abstract petals */
+  .petal-group {
+    position: absolute;
+  }
+  .petal {
+    position: absolute;
+    border-radius: 50% 0 50% 0;
+  }
+
+  /* Top-right flower cluster */
+  .flower-1 { top: 60px; right: 80px; }
+  .flower-1 .petal-1 {
+    width: 40px; height: 60px;
+    background: rgba(180, 130, 200, 0.12);
+    transform: rotate(0deg);
+    top: 0; left: 20px;
+  }
+  .flower-1 .petal-2 {
+    width: 40px; height: 60px;
+    background: rgba(180, 130, 200, 0.1);
+    transform: rotate(72deg);
+    top: -5px; left: 35px;
+  }
+  .flower-1 .petal-3 {
+    width: 40px; height: 60px;
+    background: rgba(180, 130, 200, 0.08);
+    transform: rotate(144deg);
+    top: 15px; left: 40px;
+  }
+  .flower-1 .petal-4 {
+    width: 40px; height: 60px;
+    background: rgba(180, 130, 200, 0.1);
+    transform: rotate(216deg);
+    top: 20px; left: 10px;
+  }
+  .flower-1 .petal-5 {
+    width: 40px; height: 60px;
+    background: rgba(180, 130, 200, 0.12);
+    transform: rotate(288deg);
+    top: 0px; left: 0px;
+  }
+  .flower-1 .center {
+    position: absolute;
+    width: 12px; height: 12px;
+    background: rgba(197, 163, 85, 0.2);
+    border-radius: 50%;
+    top: 24px; left: 24px;
+  }
+
+  /* Bottom-left flower cluster */
+  .flower-2 { bottom: 280px; left: 60px; }
+  .flower-2 .petal-1 {
+    width: 35px; height: 50px;
+    background: rgba(197, 163, 85, 0.1);
+    transform: rotate(15deg);
+    top: 0; left: 15px;
+    border-radius: 50% 0 50% 0;
+  }
+  .flower-2 .petal-2 {
+    width: 35px; height: 50px;
+    background: rgba(197, 163, 85, 0.08);
+    transform: rotate(87deg);
+    top: -5px; left: 30px;
+    border-radius: 50% 0 50% 0;
+  }
+  .flower-2 .petal-3 {
+    width: 35px; height: 50px;
+    background: rgba(197, 163, 85, 0.06);
+    transform: rotate(159deg);
+    top: 12px; left: 32px;
+    border-radius: 50% 0 50% 0;
+  }
+  .flower-2 .petal-4 {
+    width: 35px; height: 50px;
+    background: rgba(197, 163, 85, 0.08);
+    transform: rotate(231deg);
+    top: 18px; left: 8px;
+    border-radius: 50% 0 50% 0;
+  }
+  .flower-2 .petal-5 {
+    width: 35px; height: 50px;
+    background: rgba(197, 163, 85, 0.1);
+    transform: rotate(303deg);
+    top: 2px; left: -2px;
+    border-radius: 50% 0 50% 0;
+  }
+  .flower-2 .center {
+    position: absolute;
+    width: 10px; height: 10px;
+    background: rgba(180, 130, 200, 0.15);
+    border-radius: 50%;
+    top: 20px; left: 20px;
+  }
+
+  /* Scattered small leaf shapes */
+  .leaf {
+    position: absolute;
+    border-radius: 0 50% 0 50%;
+  }
+  .leaf-1 {
+    width: 30px; height: 14px;
+    background: rgba(180, 130, 200, 0.08);
+    top: 180px; left: 120px;
+    transform: rotate(-30deg);
+  }
+  .leaf-2 {
+    width: 25px; height: 12px;
+    background: rgba(197, 163, 85, 0.08);
+    top: 300px; right: 130px;
+    transform: rotate(20deg);
+  }
+  .leaf-3 {
+    width: 22px; height: 10px;
+    background: rgba(180, 130, 200, 0.06);
+    bottom: 380px; left: 200px;
+    transform: rotate(-15deg);
+  }
+  .leaf-4 {
+    width: 28px; height: 13px;
+    background: rgba(197, 163, 85, 0.06);
+    top: 420px; right: 90px;
+    transform: rotate(35deg);
+  }
+  .leaf-5 {
+    width: 20px; height: 9px;
+    background: rgba(255, 255, 255, 0.04);
+    top: 250px; left: 350px;
+    transform: rotate(-45deg);
+  }
+
+  /* Floating circles */
+  .float-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid;
+  }
+  .fc-1 { width: 40px; height: 40px; top: 140px; right: 220px; border-color: rgba(180,130,200,0.1); }
+  .fc-2 { width: 25px; height: 25px; top: 380px; left: 100px; border-color: rgba(197,163,85,0.1); }
+  .fc-3 { width: 30px; height: 30px; bottom: 340px; right: 160px; border-color: rgba(180,130,200,0.08); }
+
+  /* Small sparkle dots */
+  .dot {
+    position: absolute;
+    border-radius: 50%;
+    background: #C5A355;
+  }
+  .dot-1 { width: 3px; height: 3px; top: 200px; left: 250px; opacity: 0.25; }
+  .dot-2 { width: 2px; height: 2px; top: 350px; right: 280px; opacity: 0.2; }
+  .dot-3 { width: 3px; height: 3px; bottom: 350px; left: 300px; opacity: 0.2; }
+  .dot-4 { width: 2px; height: 2px; top: 280px; right: 160px; opacity: 0.3; }
+  .dot-5 { width: 3px; height: 3px; top: 160px; left: 400px; opacity: 0.15; }
+
+  /* Vertical decorative lines */
+  .vline-left {
+    position: absolute;
+    top: 150px; left: 55px;
+    width: 1px; height: 550px;
+    background: linear-gradient(180deg, transparent, rgba(180,130,200,0.12), transparent);
+  }
+  .vline-right {
+    position: absolute;
+    top: 150px; right: 55px;
+    width: 1px; height: 550px;
+    background: linear-gradient(180deg, transparent, rgba(197,163,85,0.1), transparent);
+  }
+
+  /* Logo */
+  .logo-area {
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 48px;
+  }
+  .logo-area img {
+    height: 100%;
+    width: auto;
+    opacity: 0.85;
+  }
+
+  /* Large 8 watermark */
+  .big-eight {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 320px;
+    font-weight: 700;
+    color: rgba(180, 130, 200, 0.04);
+    line-height: 1;
+  }
+
+  /* Date */
+  .date-badge {
+    position: absolute;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #C5A355;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  /* Main text */
+  .main-text {
+    position: absolute;
+    top: 280px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 860px;
+    z-index: 2;
+  }
+  .main-text .mart {
+    font-family: 'Playfair Display', serif;
+    font-size: 100px;
+    font-weight: 700;
+    color: #C5A355;
+    line-height: 1;
+    letter-spacing: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .main-text .mart .number {
+    font-size: 120px;
+    color: #ffffff;
+  }
+  .main-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 46px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.35;
+    letter-spacing: 2px;
+    margin-top: 20px;
+  }
+  .main-text h1 .purple {
+    color: #b882d0;
+  }
+  .main-text h1 .gold {
+    color: #C5A355;
+  }
+
+  /* Divider */
+  .divider {
+    position: absolute;
+    top: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .divider-line {
+    width: 50px;
+    height: 1px;
+  }
+  .divider-line:first-child {
+    background: linear-gradient(90deg, transparent, rgba(180,130,200,0.3));
+  }
+  .divider-line:last-child {
+    background: linear-gradient(90deg, rgba(197,163,85,0.3), transparent);
+  }
+  .divider-dot {
+    width: 5px; height: 5px;
+    background: #C5A355;
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+
+  /* Subtitle */
+  .subtitle {
+    position: absolute;
+    top: 640px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 700px;
+  }
+  .subtitle p {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1px;
+    line-height: 1.6;
+  }
+
+  /* Bottom purple accent */
+  .bottom-accent {
+    position: absolute;
+    bottom: 182px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(180,130,200,0.2), transparent);
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 175px;
+    background: linear-gradient(180deg, transparent 0%, rgba(10,10,24,0.85) 40%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding-top: 15px;
+  }
+  .agent-photo-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #C5A355;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .agent-info {
+    text-align: left;
+  }
+  .agent-info .name {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 1px;
+  }
+  .agent-info .phone {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+  .logo-bottom {
+    position: absolute;
+    bottom: 38px;
+    right: 55px;
+    height: 36px;
+  }
+  .logo-bottom img {
+    height: 100%;
+    width: auto;
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="glow-purple"></div>
+  <div class="glow-gold"></div>
+
+  <!-- Floral decorations -->
+  <div class="petal-group flower-1">
+    <div class="petal petal-1"></div>
+    <div class="petal petal-2"></div>
+    <div class="petal petal-3"></div>
+    <div class="petal petal-4"></div>
+    <div class="petal petal-5"></div>
+    <div class="center"></div>
+  </div>
+  <div class="petal-group flower-2">
+    <div class="petal-1"></div>
+    <div class="petal-2"></div>
+    <div class="petal-3"></div>
+    <div class="petal-4"></div>
+    <div class="petal-5"></div>
+    <div class="center"></div>
+  </div>
+
+  <!-- Leaves -->
+  <div class="leaf leaf-1"></div>
+  <div class="leaf leaf-2"></div>
+  <div class="leaf leaf-3"></div>
+  <div class="leaf leaf-4"></div>
+  <div class="leaf leaf-5"></div>
+
+  <!-- Circles -->
+  <div class="float-circle fc-1"></div>
+  <div class="float-circle fc-2"></div>
+  <div class="float-circle fc-3"></div>
+
+  <!-- Dots -->
+  <div class="dot dot-1"></div>
+  <div class="dot dot-2"></div>
+  <div class="dot dot-3"></div>
+  <div class="dot dot-4"></div>
+  <div class="dot dot-5"></div>
+
+  <!-- Vertical lines -->
+  <div class="vline-left"></div>
+  <div class="vline-right"></div>
+
+  <!-- Large 8 watermark -->
+  <div class="big-eight">8</div>
+
+  <!-- Logo -->
+  <div class="logo-area">
+    <img data-field="logo" src="" alt="Logo">
+  </div>
+
+  <!-- Date -->
+  <div class="date-badge">Dunya Kadinlar Gunu</div>
+
+  <!-- Main text -->
+  <div class="main-text">
+    <div class="mart">
+      <span class="number">8</span> Mart
+    </div>
+    <h1><span class="purple">Dunya</span> Kadinlar Gunu<br><span class="gold">Kutlu Olsun</span></h1>
+  </div>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-dot"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Subtitle -->
+  <div class="subtitle">
+    <p>Guclu, kararli ve ilham veren<br>tum kadinlarimizin gunu kutlu olsun</p>
+  </div>
+
+  <div class="bottom-accent"></div>
+
+  <!-- Agent section -->
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-info">
+      <div class="name" data-field="agentName"></div>
+      <div class="phone" data-field="agentPhone"></div>
+    </div>
+    <div class="logo-bottom">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+  </div>
+</body>
+</html>

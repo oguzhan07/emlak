@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1920px;height:1080px;font-family:'Inter',sans-serif;overflow:hidden;background:#1B2A4A;display:flex;flex-direction:column}
+
+.header{height:80px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:#0F1A30;flex-shrink:0}
+.logo{height:42px}
+.header-center{display:flex;align-items:center;gap:20px}
+.title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:white}
+.badge{padding:6px 16px;font-size:11px;font-weight:800;letter-spacing:2px;background:#C5A355;color:#1B2A4A;border-radius:4px}
+.price-header{font-size:26px;font-weight:800;color:#C5A355}
+
+.gallery{flex:1;display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;min-height:0}
+.gal-item{background-size:cover;background-position:center;position:relative}
+.gal-main{grid-row:1/3}
+
+.footer{height:110px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:#0F1A30;flex-shrink:0}
+
+.info-left{display:flex;align-items:center;gap:32px}
+.location{font-size:14px;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:8px}
+.loc-icon{color:#C5A355}
+.features{display:flex;gap:8px}
+.feat{padding:7px 14px;background:rgba(197,163,85,0.1);border:1px solid rgba(197,163,85,0.2);border-radius:20px;font-size:12px;font-weight:600;color:#D4B76A}
+
+.agent{display:flex;align-items:center;gap:14px}
+.agent-photo{width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid #C5A355}
+.agent-name{font-size:14px;font-weight:700;color:white}
+.agent-phone{font-size:12px;color:#C5A355}
+.footer-logo{height:38px}
+</style></head>
+<body>
+  <div class="header">
+    <img class="logo" data-field="logo" src="">
+    <div class="header-center">
+      <div class="badge" data-field="listingType">SATILIK</div>
+      <div class="title" data-field="title">İlan Başlığı</div>
+    </div>
+    <div class="price-header" data-field="price">0 TL</div>
+  </div>
+
+  <div class="gallery">
+    <div class="gal-item gal-main" data-image-index="0"></div>
+    <div class="gal-item" data-image-index="1"></div>
+    <div class="gal-item" data-image-index="2"></div>
+    <div class="gal-item" data-image-index="3"></div>
+    <div class="gal-item" data-image-index="4"></div>
+  </div>
+
+  <div class="footer">
+    <div class="info-left">
+      <div class="location">
+        <span class="loc-icon">📍</span>
+        <span data-field="location">Konum</span>
+      </div>
+      <div class="features" data-features></div>
+    </div>
+    <div class="agent">
+      <img class="agent-photo" data-field="agentPhoto" src="">
+      <div>
+        <div class="agent-name" data-field="agentName">İsim Soyisim</div>
+        <div class="agent-phone" data-field="agentPhone">+90 5XX</div>
+      </div>
+    </div>
+    <img class="footer-logo" data-field="logo" src="" style="height:38px">
+  </div>
+</body></html>

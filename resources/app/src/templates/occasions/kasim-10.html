@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>10 Kasim - Ataturk'u Anma Gunu</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0a;
+    position: relative;
+  }
+
+  /* Subtle dark radial gradient */
+  .bg-gradient {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at 50% 40%, #1a1a1a 0%, #0a0a0a 70%);
+  }
+
+  /* Very subtle gold line accents */
+  .gold-line-top {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent 10%, #C5A355 50%, transparent 90%);
+    opacity: 0.6;
+  }
+  .gold-line-bottom {
+    position: absolute;
+    bottom: 200px; left: 0;
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent 10%, #C5A355 50%, transparent 90%);
+    opacity: 0.3;
+  }
+
+  /* Atatürk silhouette suggestion - abstract geometric */
+  .silhouette-container {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 400px;
+  }
+  .silhouette-head {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 150px;
+    background: linear-gradient(180deg, #1a1a1a 0%, #151515 100%);
+    border-radius: 50% 50% 45% 45%;
+    border: 1px solid rgba(197, 163, 85, 0.15);
+  }
+  .silhouette-shoulders {
+    position: absolute;
+    top: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 260px;
+    background: linear-gradient(180deg, #151515 0%, #0f0f0f 100%);
+    border-radius: 50% 50% 0 0;
+    border: 1px solid rgba(197, 163, 85, 0.1);
+    border-bottom: none;
+  }
+  /* Subtle gold glow behind silhouette */
+  .silhouette-glow {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(197, 163, 85, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  /* 09:05 time display */
+  .time-display {
+    position: absolute;
+    top: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: #C5A355;
+    letter-spacing: 12px;
+    opacity: 0.9;
+  }
+  .time-separator {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: #C5A355;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 8px;
+    position: relative;
+    top: -4px;
+  }
+  .time-separator::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    background: #C5A355;
+    border-radius: 50%;
+  }
+
+  /* Main text */
+  .main-text {
+    position: absolute;
+    top: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 800px;
+  }
+  .main-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+  .main-text .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+    color: #C5A355;
+    letter-spacing: 3px;
+    margin-top: 16px;
+    opacity: 0.8;
+  }
+  .date-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-top: 20px;
+  }
+
+  /* Decorative corner accents */
+  .corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-color: rgba(197, 163, 85, 0.2);
+    border-style: solid;
+  }
+  .corner-tl { top: 40px; left: 40px; border-width: 1px 0 0 1px; }
+  .corner-tr { top: 40px; right: 40px; border-width: 1px 1px 0 0; }
+  .corner-bl { bottom: 220px; left: 40px; border-width: 0 0 1px 1px; }
+  .corner-br { bottom: 220px; right: 40px; border-width: 0 1px 1px 0; }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 30%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding-top: 20px;
+  }
+  .agent-photo-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid rgba(197, 163, 85, 0.5);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .agent-info {
+    text-align: left;
+  }
+  .agent-info .name {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 1px;
+    opacity: 0.9;
+  }
+  .agent-info .phone {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+  .logo-wrapper {
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+    height: 40px;
+  }
+  .logo-wrapper img {
+    height: 100%;
+    width: auto;
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+
+  <!-- Decorative corners -->
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <!-- Gold lines -->
+  <div class="gold-line-top"></div>
+  <div class="gold-line-bottom"></div>
+
+  <!-- Atatürk silhouette suggestion -->
+  <div class="silhouette-container">
+    <div class="silhouette-glow"></div>
+    <div class="silhouette-head"></div>
+    <div class="silhouette-shoulders"></div>
+  </div>
+
+  <!-- Time 09:05 -->
+  <div class="time-display">
+    09<span class="time-separator"></span>05
+  </div>
+
+  <!-- Main text -->
+  <div class="main-text">
+    <h1>Saygi ve Minnetle Aniyoruz</h1>
+    <div class="subtitle">Mustafa Kemal Ataturk</div>
+    <div class="date-text">10 Kasim</div>
+  </div>
+
+  <!-- Agent section -->
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-info">
+      <div class="name" data-field="agentName"></div>
+      <div class="phone" data-field="agentPhone"></div>
+    </div>
+    <div class="logo-wrapper">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0A1628;
+    position: relative;
+  }
+
+  /* Deep navy gradient */
+  .bg-base {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at 50% 30%, #1B2A4A 0%, #0E1A30 40%, #080F1E 100%);
+    z-index: 0;
+  }
+
+  /* Radiating gold light effect from center-top */
+  .light-radiance {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(ellipse at 50% 20%, rgba(197,163,85,0.12) 0%, rgba(197,163,85,0.05) 25%, rgba(197,163,85,0.02) 40%, transparent 60%);
+    z-index: 1;
+  }
+
+  /* Light rays */
+  .light-rays {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 600px;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .ray {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 500px;
+    background: linear-gradient(180deg, rgba(197,163,85,0.15), transparent);
+    transform-origin: top center;
+  }
+  .ray:nth-child(1) { transform: translateX(-50%) rotate(-25deg); }
+  .ray:nth-child(2) { transform: translateX(-50%) rotate(-15deg); }
+  .ray:nth-child(3) { transform: translateX(-50%) rotate(-5deg); }
+  .ray:nth-child(4) { transform: translateX(-50%) rotate(5deg); }
+  .ray:nth-child(5) { transform: translateX(-50%) rotate(15deg); }
+  .ray:nth-child(6) { transform: translateX(-50%) rotate(25deg); }
+  .ray:nth-child(7) { transform: translateX(-50%) rotate(-35deg); opacity: 0.5; }
+  .ray:nth-child(8) { transform: translateX(-50%) rotate(35deg); opacity: 0.5; }
+
+  /* Lantern - main */
+  .lantern {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+  }
+  /* Lantern chain */
+  .lantern-chain {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(180deg, transparent, #C5A355);
+    margin: 0 auto;
+  }
+  /* Lantern top cap */
+  .lantern-cap {
+    width: 50px;
+    height: 16px;
+    background: linear-gradient(180deg, #C5A355, #A08A3E);
+    margin: 0 auto;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+  }
+  .lantern-cap::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 10px;
+    border-radius: 10px 10px 0 0;
+    border: 2px solid #C5A355;
+    border-bottom: none;
+  }
+  /* Lantern body */
+  .lantern-body {
+    width: 60px;
+    height: 100px;
+    margin: 0 auto;
+    position: relative;
+    background: linear-gradient(180deg, rgba(197,163,85,0.25), rgba(197,163,85,0.08));
+    border-left: 2px solid rgba(197,163,85,0.5);
+    border-right: 2px solid rgba(197,163,85,0.5);
+    border-radius: 0 0 8px 8px;
+  }
+  /* Lantern horizontal bands */
+  .lantern-band {
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: rgba(197,163,85,0.4);
+  }
+  .lantern-band:nth-child(1) { top: 25px; }
+  .lantern-band:nth-child(2) { top: 50px; }
+  .lantern-band:nth-child(3) { top: 75px; }
+  /* Lantern glow */
+  .lantern-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(197,163,85,0.6), rgba(197,163,85,0.1), transparent);
+  }
+  /* Lantern bottom tip */
+  .lantern-tip {
+    width: 40px;
+    height: 12px;
+    background: linear-gradient(180deg, #A08A3E, #C5A355);
+    margin: 0 auto;
+    border-radius: 0 0 6px 6px;
+    position: relative;
+  }
+  .lantern-tip::after {
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 14px;
+    background: linear-gradient(180deg, #C5A355, transparent);
+  }
+
+  /* Side lanterns (smaller) */
+  .lantern-small {
+    position: absolute;
+    z-index: 3;
+    opacity: 0.4;
+  }
+  .lantern-small-left {
+    top: 120px;
+    left: 160px;
+    transform: scale(0.6);
+  }
+  .lantern-small-right {
+    top: 100px;
+    right: 140px;
+    transform: scale(0.55);
+  }
+  .lantern-small-far-left {
+    top: 180px;
+    left: 60px;
+    transform: scale(0.35);
+    opacity: 0.2;
+  }
+  .lantern-small-far-right {
+    top: 160px;
+    right: 50px;
+    transform: scale(0.35);
+    opacity: 0.2;
+  }
+  .ls-chain {
+    width: 1px;
+    height: 30px;
+    background: linear-gradient(180deg, transparent, #C5A355);
+    margin: 0 auto;
+  }
+  .ls-body {
+    width: 40px;
+    height: 70px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(197,163,85,0.2), rgba(197,163,85,0.05));
+    border-left: 1px solid rgba(197,163,85,0.3);
+    border-right: 1px solid rgba(197,163,85,0.3);
+    border-radius: 4px 4px 6px 6px;
+    position: relative;
+  }
+  .ls-glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(197,163,85,0.4), transparent);
+  }
+
+  /* Floating particles/stars */
+  .star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #C5A355;
+    border-radius: 50%;
+    z-index: 2;
+  }
+  .star:nth-child(1) { top: 300px; left: 100px; opacity: 0.3; }
+  .star:nth-child(2) { top: 250px; left: 250px; opacity: 0.2; width: 2px; height: 2px; }
+  .star:nth-child(3) { top: 350px; right: 200px; opacity: 0.25; }
+  .star:nth-child(4) { top: 280px; right: 100px; opacity: 0.15; width: 2px; height: 2px; }
+  .star:nth-child(5) { top: 450px; left: 80px; opacity: 0.2; }
+  .star:nth-child(6) { top: 400px; right: 120px; opacity: 0.18; width: 2px; height: 2px; }
+  .star:nth-child(7) { top: 200px; left: 400px; opacity: 0.12; }
+  .star:nth-child(8) { top: 220px; right: 350px; opacity: 0.15; }
+
+  /* Content */
+  .content {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+  }
+
+  /* Logo */
+  .logo-container {
+    position: absolute;
+    top: 55px;
+    left: 0; right: 0;
+    text-align: center;
+  }
+  .logo-container img {
+    height: 55px;
+    object-fit: contain;
+  }
+
+  /* Message area */
+  .message-area {
+    text-align: center;
+    margin-top: 80px;
+  }
+
+  .occasion-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: #C5A355;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    text-shadow: 0 0 60px rgba(197,163,85,0.2);
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 24px 0;
+  }
+  .orn-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197,163,85,0.35), transparent);
+  }
+  .orn-diamond {
+    width: 8px;
+    height: 8px;
+    border: 1px solid rgba(197,163,85,0.5);
+    transform: rotate(45deg);
+  }
+
+  .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 2px;
+  }
+
+  .message-bottom {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-top: 32px;
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 55px;
+    left: 0; right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .agent-photo-wrapper {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, #C5A355, #8A7034, #C5A355);
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid #0A1628;
+  }
+
+  .agent-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+  }
+
+  .agent-phone {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-base"></div>
+  <div class="light-radiance"></div>
+
+  <!-- Light rays -->
+  <div class="light-rays">
+    <div class="ray"></div><div class="ray"></div>
+    <div class="ray"></div><div class="ray"></div>
+    <div class="ray"></div><div class="ray"></div>
+    <div class="ray"></div><div class="ray"></div>
+  </div>
+
+  <!-- Main lantern -->
+  <div class="lantern">
+    <div class="lantern-chain"></div>
+    <div class="lantern-cap"></div>
+    <div class="lantern-body">
+      <div class="lantern-band"></div>
+      <div class="lantern-band"></div>
+      <div class="lantern-band"></div>
+      <div class="lantern-glow"></div>
+    </div>
+    <div class="lantern-tip"></div>
+  </div>
+
+  <!-- Side lanterns -->
+  <div class="lantern-small lantern-small-left">
+    <div class="ls-chain"></div>
+    <div class="ls-body"><div class="ls-glow"></div></div>
+  </div>
+  <div class="lantern-small lantern-small-right">
+    <div class="ls-chain"></div>
+    <div class="ls-body"><div class="ls-glow"></div></div>
+  </div>
+  <div class="lantern-small lantern-small-far-left">
+    <div class="ls-chain"></div>
+    <div class="ls-body"><div class="ls-glow"></div></div>
+  </div>
+  <div class="lantern-small lantern-small-far-right">
+    <div class="ls-chain"></div>
+    <div class="ls-body"><div class="ls-glow"></div></div>
+  </div>
+
+  <!-- Stars/particles -->
+  <div class="star"></div><div class="star"></div>
+  <div class="star"></div><div class="star"></div>
+  <div class="star"></div><div class="star"></div>
+  <div class="star"></div><div class="star"></div>
+
+  <div class="content">
+    <div class="logo-container">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+
+    <div class="message-area">
+      <h1 class="occasion-name" data-field="occasionName"></h1>
+      <div class="ornament">
+        <div class="orn-line"></div>
+        <div class="orn-diamond"></div>
+        <div class="orn-line"></div>
+      </div>
+      <p class="subtitle">Kandiliniz M&#252;barek Olsun</p>
+      <p class="message-bottom">Ozgu Invest Gayrimenkul</p>
+    </div>
+  </div>
+
+  <!-- Agent section -->
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-name" data-field="agentName"></div>
+    <div class="agent-phone" data-field="agentPhone"></div>
+  </div>
+</body>
+</html>

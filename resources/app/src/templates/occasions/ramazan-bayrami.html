@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0F2027;
+    position: relative;
+  }
+
+  /* Deep gradient background */
+  .bg-gradient {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(170deg, #1B2A4A 0%, #0D3B3F 40%, #1B2A4A 100%);
+    z-index: 0;
+  }
+
+  /* Radial glow */
+  .bg-glow {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at 50% 35%, rgba(197,163,85,0.1) 0%, transparent 55%);
+    z-index: 1;
+  }
+
+  /* Islamic geometric pattern overlay */
+  .pattern-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2;
+    overflow: hidden;
+    opacity: 0.06;
+  }
+  .pattern-cell {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border: 1px solid #C5A355;
+    transform: rotate(45deg);
+  }
+  /* Grid of rotated squares to create Islamic pattern effect */
+  .pattern-cell:nth-child(1) { top: -60px; left: 60px; }
+  .pattern-cell:nth-child(2) { top: -60px; left: 300px; }
+  .pattern-cell:nth-child(3) { top: -60px; left: 540px; }
+  .pattern-cell:nth-child(4) { top: -60px; left: 780px; }
+  .pattern-cell:nth-child(5) { top: 120px; left: -60px; }
+  .pattern-cell:nth-child(6) { top: 120px; left: 180px; }
+  .pattern-cell:nth-child(7) { top: 120px; left: 420px; }
+  .pattern-cell:nth-child(8) { top: 120px; left: 660px; }
+  .pattern-cell:nth-child(9) { top: 120px; left: 900px; }
+  .pattern-cell:nth-child(10) { top: 300px; left: 60px; }
+  .pattern-cell:nth-child(11) { top: 300px; left: 300px; }
+  .pattern-cell:nth-child(12) { top: 300px; left: 540px; }
+  .pattern-cell:nth-child(13) { top: 300px; left: 780px; }
+  .pattern-cell:nth-child(14) { top: 840px; left: 60px; }
+  .pattern-cell:nth-child(15) { top: 840px; left: 300px; }
+  .pattern-cell:nth-child(16) { top: 840px; left: 540px; }
+  .pattern-cell:nth-child(17) { top: 840px; left: 780px; }
+  .pattern-cell:nth-child(18) { top: 960px; left: 180px; }
+  .pattern-cell:nth-child(19) { top: 960px; left: 420px; }
+  .pattern-cell:nth-child(20) { top: 960px; left: 660px; }
+
+  /* Arch shapes at top */
+  .arch-row {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 160px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+  .arch {
+    width: 180px;
+    height: 160px;
+    border-bottom-left-radius: 90px;
+    border-bottom-right-radius: 90px;
+    border: 1px solid rgba(197,163,85,0.15);
+    border-top: none;
+    position: relative;
+  }
+  .arch::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 20px; right: 20px;
+    height: 120px;
+    border-bottom-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+    border: 1px solid rgba(197,163,85,0.1);
+    border-top: none;
+  }
+
+  /* Crescent moon */
+  .crescent {
+    position: absolute;
+    top: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    width: 100px;
+    height: 100px;
+  }
+  .crescent-outer {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #C5A355;
+    position: absolute;
+  }
+  .crescent-inner {
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    background: #132C3A;
+    position: absolute;
+    top: 4px;
+    left: 22px;
+  }
+  .crescent-star {
+    position: absolute;
+    top: 30px;
+    left: 62px;
+    z-index: 1;
+  }
+  .crescent-star::before {
+    content: '';
+    position: absolute;
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 14px solid #C5A355;
+    top: -10px; left: -8px;
+  }
+  .crescent-star::after {
+    content: '';
+    position: absolute;
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 14px solid #C5A355;
+    top: -2px; left: -8px;
+  }
+
+  /* Side border decorations */
+  .side-border {
+    position: absolute;
+    top: 200px;
+    bottom: 200px;
+    width: 40px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .side-border-left { left: 30px; }
+  .side-border-right { right: 30px; }
+  .side-dot {
+    width: 6px;
+    height: 6px;
+    background: #C5A355;
+    opacity: 0.2;
+    transform: rotate(45deg);
+  }
+
+  /* Content */
+  .content {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+  }
+
+  /* Logo */
+  .logo-container {
+    position: absolute;
+    top: 55px;
+    right: 60px;
+  }
+  .logo-container img {
+    height: 55px;
+    object-fit: contain;
+  }
+
+  /* Message area */
+  .message-area {
+    text-align: center;
+    margin-top: 60px;
+  }
+
+  .top-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    color: rgba(197,163,85,0.7);
+    margin-bottom: 30px;
+  }
+
+  .main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+  }
+  .main-title span { display: block; }
+
+  .title-gold {
+    color: #C5A355;
+    font-size: 58px;
+  }
+
+  .ornament-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 28px 0;
+  }
+  .ornament-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197,163,85,0.4), transparent);
+  }
+  .ornament-diamond {
+    width: 10px;
+    height: 10px;
+    border: 1px solid #C5A355;
+    transform: rotate(45deg);
+  }
+  .ornament-circle {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #C5A355;
+    opacity: 0.5;
+  }
+
+  .sub-message {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 24px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 55px;
+    left: 0; right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .agent-photo-wrapper {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, #C5A355, #A08A3E, #C5A355);
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid #0F2027;
+  }
+
+  .agent-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+  }
+
+  .agent-phone {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="bg-glow"></div>
+
+  <!-- Islamic geometric pattern -->
+  <div class="pattern-overlay">
+    <div class="pattern-cell"></div><div class="pattern-cell"></div>
+    <div class="pattern-cell"></div><div class="pattern-cell"></div>
+    <div class="pattern-cell"></div><div class="pattern-cell"></div>
+    <div class="pattern-cell"></div><div class="pattern-cell"></div>
+    <div class="pattern-cell"></div><div class="pattern-cell"></div>
+    <div class="pattern-cell"></div><div class="pattern-cell"></div>
+    <div class="pattern-cell"></div><div class="pattern-cell"></div>
+    <div class="pattern-cell"></div><div class="pattern-cell"></div>
+    <div class="pattern-cell"></div><div class="pattern-cell"></div>
+    <div class="pattern-cell"></div><div class="pattern-cell"></div>
+  </div>
+
+  <!-- Arch row -->
+  <div class="arch-row">
+    <div class="arch"></div>
+    <div class="arch"></div>
+    <div class="arch"></div>
+    <div class="arch"></div>
+    <div class="arch"></div>
+    <div class="arch"></div>
+  </div>
+
+  <!-- Crescent moon -->
+  <div class="crescent">
+    <div class="crescent-outer"></div>
+    <div class="crescent-inner"></div>
+    <div class="crescent-star"></div>
+  </div>
+
+  <!-- Side decorations -->
+  <div class="side-border side-border-left">
+    <div class="side-dot"></div><div class="side-dot"></div>
+    <div class="side-dot"></div><div class="side-dot"></div>
+    <div class="side-dot"></div><div class="side-dot"></div>
+    <div class="side-dot"></div><div class="side-dot"></div>
+  </div>
+  <div class="side-border side-border-right">
+    <div class="side-dot"></div><div class="side-dot"></div>
+    <div class="side-dot"></div><div class="side-dot"></div>
+    <div class="side-dot"></div><div class="side-dot"></div>
+    <div class="side-dot"></div><div class="side-dot"></div>
+  </div>
+
+  <div class="content">
+    <div class="logo-container">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+
+    <div class="message-area">
+      <div class="top-label">Ozgu Invest Gayrimenkul</div>
+      <h1 class="main-title">
+        <span>Ramazan Bayraminiz</span>
+        <span class="title-gold">M&#252;barek Olsun</span>
+      </h1>
+      <div class="ornament-row">
+        <div class="ornament-circle"></div>
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line"></div>
+        <div class="ornament-circle"></div>
+      </div>
+      <p class="sub-message">Huzur ve mutluluk dolu bayramlar dileriz</p>
+    </div>
+  </div>
+
+  <!-- Agent section -->
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-name" data-field="agentName"></div>
+    <div class="agent-phone" data-field="agentPhone"></div>
+  </div>
+</body>
+</html>

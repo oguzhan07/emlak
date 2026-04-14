@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #FFFFFF;
+    position: relative;
+  }
+
+  /* Dynamic diagonal background */
+  .bg-diagonal {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 45%, #E30A17 45%, #E30A17 55%, #1B2A4A 55%, #1B2A4A 100%);
+    z-index: 1;
+  }
+
+  /* Overlay to soften */
+  .bg-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 42%, transparent 48%, transparent 52%, rgba(27,42,74,0.85) 58%, rgba(27,42,74,0.95) 100%);
+    z-index: 2;
+  }
+
+  /* Dynamic lines - sporty feel */
+  .speed-line {
+    position: absolute;
+    height: 3px;
+    background: rgba(197,163,85,0.3);
+    z-index: 3;
+    border-radius: 2px;
+  }
+  .speed-1 { top: 300px; left: 0; width: 250px; }
+  .speed-2 { top: 340px; left: 0; width: 180px; opacity: 0.5; }
+  .speed-3 { top: 380px; left: 0; width: 120px; opacity: 0.3; }
+  .speed-4 { bottom: 350px; right: 0; width: 200px; }
+  .speed-5 { bottom: 390px; right: 0; width: 140px; opacity: 0.5; }
+
+  /* Geometric triangle accents */
+  .triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: 3;
+  }
+  .tri-1 {
+    top: 150px;
+    left: 650px;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 70px solid rgba(227,10,23,0.1);
+  }
+  .tri-2 {
+    top: 500px;
+    right: 200px;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 45px solid rgba(197,163,85,0.15);
+    transform: rotate(30deg);
+  }
+  .tri-3 {
+    bottom: 350px;
+    left: 500px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 35px solid rgba(255,255,255,0.1);
+    transform: rotate(-15deg);
+  }
+
+  /* Circle accents */
+  .circle-accent {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 3;
+  }
+  .ca-1 {
+    top: 100px;
+    right: 250px;
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgba(227,10,23,0.1);
+  }
+  .ca-2 {
+    bottom: 400px;
+    left: 400px;
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(197,163,85,0.2);
+  }
+
+  .content {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 70px 80px;
+  }
+
+  .logo-top {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    z-index: 6;
+  }
+  .logo-top img {
+    height: 60px;
+    object-fit: contain;
+  }
+
+  .date-big {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 160px;
+    color: #1B2A4A;
+    line-height: 0.9;
+    margin-top: 40px;
+  }
+
+  .month-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 50px;
+    color: #E30A17;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    margin-top: -5px;
+  }
+
+  .gold-bar {
+    width: 100px;
+    height: 4px;
+    background: #C5A355;
+    margin: 30px 0;
+  }
+
+  .title-block {
+    margin-bottom: 10px;
+  }
+  .title-line {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 38px;
+    color: #1B2A4A;
+    line-height: 1.3;
+  }
+
+  .subtitle-block {
+    margin-top: 15px;
+  }
+  .sub-line {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .sub-red { color: #E30A17; }
+  .sub-navy { color: #1B2A4A; opacity: 0.6; }
+
+  .quote-section {
+    position: absolute;
+    bottom: 230px;
+    left: 80px;
+    right: 80px;
+    z-index: 5;
+  }
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: rgba(255,255,255,0.9);
+    font-style: italic;
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    background: linear-gradient(180deg, transparent 0%, #1B2A4A 35%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 6;
+  }
+
+  .agent-photo-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #C5A355;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .agent-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .agent-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+  .agent-phone {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #C5A355;
+  }
+  .agent-company {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-diagonal"></div>
+  <div class="bg-overlay"></div>
+
+  <div class="speed-line speed-1"></div>
+  <div class="speed-line speed-2"></div>
+  <div class="speed-line speed-3"></div>
+  <div class="speed-line speed-4"></div>
+  <div class="speed-line speed-5"></div>
+
+  <div class="triangle tri-1"></div>
+  <div class="triangle tri-2"></div>
+  <div class="triangle tri-3"></div>
+
+  <div class="circle-accent ca-1"></div>
+  <div class="circle-accent ca-2"></div>
+
+  <div class="content">
+    <div class="logo-top">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+
+    <div class="date-big">19</div>
+    <div class="month-text">Mayis</div>
+    <div class="gold-bar"></div>
+
+    <div class="title-block">
+      <div class="title-line">Ataturk'u Anma,</div>
+      <div class="title-line">Genclik ve Spor</div>
+      <div class="title-line">Bayrami</div>
+    </div>
+
+    <div class="subtitle-block">
+      <div class="sub-line sub-red">Kutlu Olsun!</div>
+    </div>
+  </div>
+
+  <div class="quote-section">
+    <div class="quote-text">"Genclige hitabesi ile genclige emanet edilen<br>Cumhuriyetimiz ilelebet payidar kalacaktir."</div>
+  </div>
+
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-info">
+      <div class="agent-name" data-field="agentName">Ad Soyad</div>
+      <div class="agent-phone" data-field="agentPhone">0500 000 00 00</div>
+      <div class="agent-company">Ozgu Invest Gayrimenkul</div>
+    </div>
+  </div>
+</body>
+</html>

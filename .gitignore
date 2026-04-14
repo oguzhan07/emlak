@@ -1,0 +1,34 @@
+# Electron binaries
+*.exe
+*.dll
+*.pak
+*.bin
+*.dat
+*.json.bak
+vk_swiftshader_icd.json
+
+# Large directories
+locales/
+resources/app/node_modules/
+
+# Template images (large media files)
+özgü-görseller/
+
+# Chromium license files
+LICENSE.electron.txt
+LICENSES.chromium.html
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Claude config
+.claude/
+
+# Backup & logs
+*.asar.backup
+*.log
+
+# Database
+*.db
+*.db-journal

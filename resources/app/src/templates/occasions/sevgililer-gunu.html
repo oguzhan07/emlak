@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>14 Subat - Sevgililer Gunu</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #1B2A4A;
+    position: relative;
+  }
+
+  /* Deep romantic gradient */
+  .bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(150deg, #1B2A4A 0%, #2a1f3d 30%, #3d1f2e 55%, #2a1525 75%, #1B2A4A 100%);
+  }
+
+  /* Soft rose glow */
+  .glow-1 {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(180, 60, 80, 0.1) 0%, transparent 65%);
+    border-radius: 50%;
+  }
+  .glow-2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(197, 163, 85, 0.06) 0%, transparent 60%);
+    border-radius: 50%;
+  }
+
+  /* Heart shapes - CSS only */
+  .heart {
+    position: absolute;
+  }
+  .heart::before, .heart::after {
+    content: '';
+    position: absolute;
+    border-radius: 50% 50% 0 0;
+    background: currentColor;
+  }
+  .heart::before {
+    left: 50%;
+    transform: translateX(-100%) rotate(-45deg);
+    transform-origin: bottom right;
+  }
+  .heart::after {
+    left: 50%;
+    transform: rotate(45deg);
+    transform-origin: bottom left;
+  }
+
+  .heart-1 {
+    top: 100px; right: 120px;
+    width: 40px; height: 40px;
+    color: rgba(180, 60, 80, 0.12);
+  }
+  .heart-1::before, .heart-1::after { width: 22px; height: 34px; }
+
+  .heart-2 {
+    top: 200px; left: 100px;
+    width: 30px; height: 30px;
+    color: rgba(197, 163, 85, 0.1);
+  }
+  .heart-2::before, .heart-2::after { width: 16px; height: 26px; }
+
+  .heart-3 {
+    bottom: 350px; right: 180px;
+    width: 24px; height: 24px;
+    color: rgba(180, 60, 80, 0.1);
+  }
+  .heart-3::before, .heart-3::after { width: 14px; height: 20px; }
+
+  .heart-4 {
+    top: 350px; left: 160px;
+    width: 20px; height: 20px;
+    color: rgba(255, 255, 255, 0.06);
+  }
+  .heart-4::before, .heart-4::after { width: 12px; height: 17px; }
+
+  .heart-5 {
+    bottom: 300px; left: 120px;
+    width: 28px; height: 28px;
+    color: rgba(197, 163, 85, 0.08);
+  }
+  .heart-5::before, .heart-5::after { width: 15px; height: 24px; }
+
+  .heart-6 {
+    top: 450px; right: 100px;
+    width: 18px; height: 18px;
+    color: rgba(180, 60, 80, 0.08);
+  }
+  .heart-6::before, .heart-6::after { width: 10px; height: 15px; }
+
+  /* Large decorative heart outline center */
+  .heart-outline {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 220px;
+  }
+  .heart-outline::before, .heart-outline::after {
+    content: '';
+    position: absolute;
+    border-radius: 50% 50% 0 0;
+    border: 1px solid rgba(197, 163, 85, 0.12);
+    background: transparent;
+  }
+  .heart-outline::before {
+    width: 120px; height: 190px;
+    left: 50%;
+    transform: translateX(-100%) rotate(-45deg);
+    transform-origin: bottom right;
+  }
+  .heart-outline::after {
+    width: 120px; height: 190px;
+    left: 50%;
+    transform: rotate(45deg);
+    transform-origin: bottom left;
+  }
+
+  /* Sparkle dots */
+  .sparkle {
+    position: absolute;
+    width: 3px; height: 3px;
+    background: #C5A355;
+    border-radius: 50%;
+  }
+  .sparkle-1 { top: 140px; left: 250px; opacity: 0.3; }
+  .sparkle-2 { top: 260px; right: 220px; opacity: 0.25; }
+  .sparkle-3 { top: 400px; left: 280px; opacity: 0.2; }
+  .sparkle-4 { bottom: 380px; right: 250px; opacity: 0.3; }
+  .sparkle-5 { top: 180px; left: 450px; opacity: 0.15; width: 2px; height: 2px; }
+  .sparkle-6 { top: 320px; right: 350px; opacity: 0.2; width: 2px; height: 2px; }
+
+  /* Thin decorative lines */
+  .deco-line-1 {
+    position: absolute;
+    top: 120px; left: 60px;
+    width: 80px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(180,60,80,0.15), transparent);
+    transform: rotate(-20deg);
+  }
+  .deco-line-2 {
+    position: absolute;
+    top: 160px; right: 70px;
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197,163,85,0.15), transparent);
+    transform: rotate(15deg);
+  }
+
+  /* Logo */
+  .logo-area {
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 48px;
+  }
+  .logo-area img {
+    height: 100%;
+    width: auto;
+    opacity: 0.8;
+  }
+
+  /* Date */
+  .date-badge {
+    position: absolute;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #C5A355;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  /* Main text */
+  .main-text {
+    position: absolute;
+    top: 370px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 800px;
+    z-index: 2;
+  }
+  .main-text .pre-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .main-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 62px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    letter-spacing: 2px;
+  }
+  .main-text h1 .rose {
+    color: #c47a88;
+  }
+  .main-text h1 .gold {
+    color: #C5A355;
+    font-style: italic;
+  }
+
+  /* Divider */
+  .divider {
+    position: absolute;
+    top: 590px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .divider-line {
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197,163,85,0.4));
+  }
+  .divider-line:last-child {
+    background: linear-gradient(90deg, rgba(197,163,85,0.4), transparent);
+  }
+  .divider-heart {
+    width: 10px; height: 10px;
+    position: relative;
+  }
+  .divider-heart::before, .divider-heart::after {
+    content: '';
+    position: absolute;
+    width: 6px; height: 9px;
+    border-radius: 50% 50% 0 0;
+    background: #C5A355;
+    opacity: 0.5;
+  }
+  .divider-heart::before {
+    left: 50%;
+    transform: translateX(-100%) rotate(-45deg);
+    transform-origin: bottom right;
+  }
+  .divider-heart::after {
+    left: 50%;
+    transform: rotate(45deg);
+    transform-origin: bottom left;
+  }
+
+  /* Subtitle */
+  .subtitle {
+    position: absolute;
+    top: 630px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 700px;
+  }
+  .subtitle p {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1px;
+    line-height: 1.6;
+  }
+
+  /* Bottom accent */
+  .bottom-accent {
+    position: absolute;
+    bottom: 185px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(180,60,80,0.2), transparent);
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 175px;
+    background: linear-gradient(180deg, transparent 0%, rgba(10,10,20,0.8) 40%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding-top: 15px;
+  }
+  .agent-photo-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #C5A355;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .agent-info {
+    text-align: left;
+  }
+  .agent-info .name {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 1px;
+  }
+  .agent-info .phone {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+  .logo-bottom {
+    position: absolute;
+    bottom: 38px;
+    right: 55px;
+    height: 36px;
+  }
+  .logo-bottom img {
+    height: 100%;
+    width: auto;
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+
+  <!-- Hearts -->
+  <div class="heart heart-1"></div>
+  <div class="heart heart-2"></div>
+  <div class="heart heart-3"></div>
+  <div class="heart heart-4"></div>
+  <div class="heart heart-5"></div>
+  <div class="heart heart-6"></div>
+  <div class="heart-outline"></div>
+
+  <!-- Sparkles -->
+  <div class="sparkle sparkle-1"></div>
+  <div class="sparkle sparkle-2"></div>
+  <div class="sparkle sparkle-3"></div>
+  <div class="sparkle sparkle-4"></div>
+  <div class="sparkle sparkle-5"></div>
+  <div class="sparkle sparkle-6"></div>
+
+  <!-- Decorative lines -->
+  <div class="deco-line-1"></div>
+  <div class="deco-line-2"></div>
+
+  <!-- Logo -->
+  <div class="logo-area">
+    <img data-field="logo" src="" alt="Logo">
+  </div>
+
+  <!-- Date -->
+  <div class="date-badge">14 Subat</div>
+
+  <!-- Main text -->
+  <div class="main-text">
+    <div class="pre-title">Sevgililer Gunu</div>
+    <h1><span class="rose">Sevgi</span> Dolu<br>Bir Gun <span class="gold">Dileriz</span></h1>
+  </div>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-heart"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Subtitle -->
+  <div class="subtitle">
+    <p>Sevdiklerinizle paylastiginiz<br>her an degerli olsun</p>
+  </div>
+
+  <div class="bottom-accent"></div>
+
+  <!-- Agent section -->
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-info">
+      <div class="name" data-field="agentName"></div>
+      <div class="phone" data-field="agentPhone"></div>
+    </div>
+    <div class="logo-bottom">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+  </div>
+</body>
+</html>

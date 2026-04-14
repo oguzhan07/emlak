@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Özgü Invest Gayrimenkul</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/panels.css">
+  <link rel="stylesheet" href="styles/modals.css">
+  <link rel="stylesheet" href="styles/forms.css">
+  <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header id="app-header">
+    <div class="header-left">
+      <img id="header-logo" src="" alt="Özgü Invest" class="header-logo">
+    </div>
+    <div class="header-right">
+      <button id="btn-refresh" class="header-btn" title="İlanları Yenile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M23 4v6h-6M1 20v-6h6"/>
+          <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+        </svg>
+        <span class="btn-text">Yenile</span>
+      </button>
+      <div id="header-profile" class="header-profile">
+        <div class="profile-photo-wrapper">
+          <img id="header-profile-photo" src="" alt="" class="profile-photo">
+        </div>
+        <div class="profile-info">
+          <span id="header-profile-name" class="profile-name">Profil Ayarla</span>
+          <span id="header-profile-phone" class="profile-phone"></span>
+        </div>
+      </div>
+      <button id="btn-settings" class="header-btn settings-btn" title="Ayarlar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <main id="app-main" class="new-studio-layout">
+    <div id="layout-top" class="layout-top">
+      <div class="main-tabs-header">
+        <button class="main-tab active" data-target="tab-listings">İLANLAR</button>
+        <button class="main-tab" data-target="tab-occasions">ÖZEL GÜNLER</button>
+      </div>
+      
+      <div id="tab-listings" class="main-tab-content active">
+        <!-- İlanlar -->
+        <div class="panel-toolbar">
+          <div class="search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+            </svg>
+            <input type="text" id="listing-search" placeholder="İlan ara...">
+          </div>
+          <div class="filter-group">
+            <select id="filter-source">
+              <option value="">Tüm Kaynaklar</option>
+              <option value="sahibinden">Sahibinden</option>
+              <option value="emlakjet">Emlakjet</option>
+              <option value="manual">Manuel</option>
+            </select>
+            <select id="filter-type">
+              <option value="">Satılık / Kiralık</option>
+              <option value="satilik">Satılık</option>
+              <option value="kiralik">Kiralık</option>
+            </select>
+          </div>
+          <button id="btn-add-listing" class="btn-add" title="Yeni İlan Ekle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+          </button>
+        </div>
+        <div id="listing-list" class="listing-list">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+      
+      <div id="tab-occasions" class="main-tab-content">
+        <!-- Özel Günler -->
+        <div class="occasions-scroll-area">
+          <div id="occasion-grid" class="template-grid">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="layout-bottom" class="layout-bottom">
+      <div class="placeholder-text">Alt Panel - İleriki Eklemeler İçin Rezerv Alan (Geliştirme Aşamasında)</div>
+    </div>
+  </main>
+
+  <!-- ═══ MODALS ═══ -->
+
+  <!-- Studio / Listing Detail Modal -->
+  <div id="modal-studio" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content modal-mega">
+      <div class="modal-header">
+        <h2 id="studio-title">İlan Stüdyosu</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body studio-body">
+        <div class="studio-left">
+          <div class="studio-listing-preview">
+            <img id="studio-listing-image" src="" alt="İlan Fotoğrafı">
+            <div class="studio-listing-info">
+              <h3 id="studio-listing-name">-</h3>
+              <p id="studio-listing-price">-</p>
+              <div id="studio-listing-features" class="studio-features-grid"></div>
+            </div>
+          </div>
+          <div class="studio-actions">
+            <button id="btn-studio-delete" class="btn btn-danger btn-block">İlanı Sil</button>
+            <button id="btn-studio-edit" class="btn btn-block">Bilgileri Düzenle</button>
+          </div>
+        </div>
+        <div class="studio-center">
+          <div class="studio-categories">
+            <button class="studio-cat-btn active" data-cat="all">Tümü</button>
+            <button class="studio-cat-btn" data-cat="kare">Kare</button>
+            <button class="studio-cat-btn" data-cat="dikey">Dikey</button>
+            <button class="studio-cat-btn" data-cat="story">Story</button>
+            <button class="studio-cat-btn" data-cat="yatay">Yatay</button>
+          </div>
+          <div class="studio-templates-grid" id="studio-templates-grid">
+            <!-- Filled dynamically by JS -->
+          </div>
+        </div>
+        <div class="studio-preview-panel" id="studio-preview-panel">
+          <div class="studio-preview-header">Ön İzleme</div>
+          <div class="studio-preview-image-wrap" id="studio-preview-wrap">
+            <div class="studio-preview-placeholder">
+              <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <path d="M21 15l-5-5L5 21"/>
+              </svg>
+              <p>Şablonun üzerine gelin</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fine Tune / Editor Modal -->
+  <div id="modal-editor" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content modal-editor-full">
+      <div class="modal-header">
+        <h2>Şablon İnce Ayar</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body editor-body">
+        <div class="editor-main-area">
+          <div class="editor-canvas-container" id="editor-canvas-container">
+            <!-- The actual editable HTML template renders here -->
+          </div>
+        </div>
+        <div class="editor-sidebar" id="editor-sidebar">
+          <div class="editor-sidebar-section">
+            <h4>Görsel Kontrolleri</h4>
+            <div class="editor-control-group">
+              <label>Zoom</label>
+              <div class="editor-input-row">
+                <input type="range" id="ec-zoom" min="50" max="300" value="100" class="editor-slider">
+                <span id="ec-zoom-val" class="editor-val">100%</span>
+              </div>
+            </div>
+            <div class="editor-control-group">
+              <label>Döndürme</label>
+              <div class="editor-input-row">
+                <input type="range" id="ec-rotation" min="-180" max="180" value="0" class="editor-slider">
+                <span id="ec-rotation-val" class="editor-val">0°</span>
+              </div>
+              <div class="editor-btn-row">
+                <button class="editor-mini-btn" id="ec-rotate-left" title="90° Sola">↺</button>
+                <button class="editor-mini-btn" id="ec-rotate-right" title="90° Sağa">↻</button>
+              </div>
+            </div>
+            <div class="editor-control-group">
+              <label>Çevirme</label>
+              <div class="editor-btn-row">
+                <button class="editor-mini-btn" id="ec-flip-x" title="Yatay Çevir">↔</button>
+                <button class="editor-mini-btn" id="ec-flip-y" title="Dikey Çevir">↕</button>
+              </div>
+            </div>
+            <div class="editor-control-group">
+              <label>Sığdırma</label>
+              <div class="editor-btn-row">
+                <button class="editor-mini-btn ec-fit-btn active" data-fit="cover">Cover</button>
+                <button class="editor-mini-btn ec-fit-btn" data-fit="contain">Contain</button>
+                <button class="editor-mini-btn ec-fit-btn" data-fit="fill">Fill</button>
+              </div>
+            </div>
+          </div>
+          <div class="editor-sidebar-section">
+            <h4>Pozisyon & Boyut</h4>
+            <div class="editor-num-grid">
+              <div class="editor-num-field">
+                <label>X</label>
+                <input type="number" id="ec-pos-x" value="100">
+              </div>
+              <div class="editor-num-field">
+                <label>Y</label>
+                <input type="number" id="ec-pos-y" value="100">
+              </div>
+              <div class="editor-num-field">
+                <label>Genişlik</label>
+                <input type="number" id="ec-width" value="600">
+              </div>
+              <div class="editor-num-field">
+                <label>Yükseklik</label>
+                <input type="number" id="ec-height" value="400">
+              </div>
+            </div>
+          </div>
+          <div class="editor-sidebar-section">
+            <button id="ec-reset-all" class="btn btn-small btn-block" style="width:100%;">Tümünü Sıfırla</button>
+          </div>
+          <p class="help-text" style="margin-top:auto; padding-top:var(--space-3);">Metin kutularına tıklayarak yazıları, emojilere tıklayarak emojileri değiştirebilirsiniz. Elemanları sürükleyerek konumlandırabilirsiniz.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-editor-cancel" class="btn">İptal</button>
+        <button id="btn-editor-download" class="btn btn-primary">Yüksek Kalite İndir</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="modal-settings" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content modal-settings">
+      <div class="modal-header">
+        <h2>Profil & Ayarlar</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="settings-section">
+          <h3>Kişisel Bilgiler</h3>
+          <div class="profile-photo-edit">
+            <div class="photo-preview">
+              <img id="settings-photo" src="" alt="Profil Fotoğrafı">
+              <button id="btn-change-photo" class="btn-small">Fotoğraf Seç</button>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ad</label>
+              <input type="text" id="settings-firstname" placeholder="Adınız">
+            </div>
+            <div class="form-group">
+              <label>Soyad</label>
+              <input type="text" id="settings-lastname" placeholder="Soyadınız">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Telefon</label>
+              <input type="text" id="settings-phone" placeholder="+90 5XX XXX XX XX">
+            </div>
+            <div class="form-group">
+              <label>E-posta</label>
+              <input type="email" id="settings-email" placeholder="ornek@mail.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Adres</label>
+            <textarea id="settings-address" rows="2" placeholder="Ofis adresi"></textarea>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Sosyal Medya</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Instagram</label>
+              <input type="text" id="settings-instagram" placeholder="@kullaniciadi">
+            </div>
+            <div class="form-group">
+              <label>Facebook</label>
+              <input type="text" id="settings-facebook" placeholder="facebook.com/...">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Twitter / X</label>
+              <input type="text" id="settings-twitter" placeholder="@kullaniciadi">
+            </div>
+            <div class="form-group">
+              <label>Website</label>
+              <input type="text" id="settings-website" placeholder="www.example.com">
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Hesap Bağlantıları</h3>
+          <div class="auth-buttons">
+            <div class="auth-row">
+              <span class="auth-label">Sahibinden.com</span>
+              <span id="auth-status-sahibinden" class="auth-status">●  Bağlı Değil</span>
+              <button id="btn-login-sahibinden" class="btn-small btn-primary">Giriş Yap</button>
+            </div>
+            <div class="auth-row">
+              <span class="auth-label">Emlakjet.com</span>
+              <span id="auth-status-emlakjet" class="auth-status">●  Bağlı Değil</span>
+              <button id="btn-login-emlakjet" class="btn-small btn-primary">Giriş Yap</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-save-settings" class="btn btn-primary">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Listing Form Modal -->
+  <div id="modal-listing-form" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2 id="listing-form-title">Yeni İlan Ekle</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group full">
+            <label>İlan Başlığı *</label>
+            <input type="text" id="lf-title" placeholder="İlan başlığını girin">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>İlan Türü</label>
+            <select id="lf-listing-type">
+              <option value="satilik">Satılık</option>
+              <option value="kiralik">Kiralık</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Emlak Tipi</label>
+            <select id="lf-property-type">
+              <option value="">Seçiniz</option>
+              <option value="Daire">Daire</option>
+              <option value="Residence">Residence</option>
+              <option value="Müstakil Ev">Müstakil Ev</option>
+              <option value="Villa">Villa</option>
+              <option value="Çiftlik Evi">Çiftlik Evi</option>
+              <option value="Köşk / Konak">Köşk / Konak</option>
+              <option value="Yalı">Yalı</option>
+              <option value="Yalı Dairesi">Yalı Dairesi</option>
+              <option value="Yazlık">Yazlık</option>
+              <option value="Prefabrik">Prefabrik</option>
+              <option value="Kooperatif">Kooperatif</option>
+              <option value="Arsa">Arsa</option>
+              <option value="Tarla">Tarla</option>
+              <option value="Dükkan / Mağaza">Dükkan / Mağaza</option>
+              <option value="Ofis">Ofis</option>
+              <option value="Depo / Antrepo">Depo / Antrepo</option>
+              <option value="Fabrika / İmalathane">Fabrika / İmalathane</option>
+              <option value="Bina">Bina</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Fiyat</label>
+            <input type="number" id="lf-price" placeholder="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Oda Sayısı</label>
+            <select id="lf-room-count">
+              <option value="">Seçiniz</option>
+              <option value="1+0">1+0 (Stüdyo)</option>
+              <option value="1+1">1+1</option>
+              <option value="1.5+1">1.5+1</option>
+              <option value="2+0">2+0</option>
+              <option value="2+1">2+1</option>
+              <option value="2.5+1">2.5+1</option>
+              <option value="2+2">2+2</option>
+              <option value="3+1">3+1</option>
+              <option value="3.5+1">3.5+1</option>
+              <option value="3+2">3+2</option>
+              <option value="4+1">4+1</option>
+              <option value="4.5+1">4.5+1</option>
+              <option value="4+2">4+2</option>
+              <option value="4+3">4+3</option>
+              <option value="5+1">5+1</option>
+              <option value="5+2">5+2</option>
+              <option value="5+3">5+3</option>
+              <option value="6+1">6+1</option>
+              <option value="6+2">6+2</option>
+              <option value="7+">7 ve üzeri</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Net m²</label>
+            <input type="number" id="lf-area" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Brüt m²</label>
+            <input type="number" id="lf-gross-area" placeholder="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Bulunduğu Kat</label>
+            <input type="number" id="lf-floor" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Kat Sayısı</label>
+            <input type="number" id="lf-total-floors" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Bina Yaşı</label>
+            <input type="number" id="lf-building-age" placeholder="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Banyo Sayısı</label>
+            <input type="number" id="lf-bathroom" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Isınma Tipi</label>
+            <select id="lf-heating">
+              <option value="">Seçiniz</option>
+              <option value="Doğalgaz (Kombi)">Doğalgaz (Kombi)</option>
+              <option value="Merkezi">Merkezi</option>
+              <option value="Merkezi (Pay Ölçer)">Merkezi (Pay Ölçer)</option>
+              <option value="Doğalgaz (Kat Kaloriferi)">Doğalgaz (Kat Kaloriferi)</option>
+              <option value="Yerden Isıtma">Yerden Isıtma</option>
+              <option value="Klima">Klima</option>
+              <option value="Soba">Soba</option>
+              <option value="Yok">Yok</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Cephe</label>
+            <select id="lf-facing">
+              <option value="">Seçiniz</option>
+              <option value="Kuzey">Kuzey</option>
+              <option value="Güney">Güney</option>
+              <option value="Doğu">Doğu</option>
+              <option value="Batı">Batı</option>
+              <option value="Kuzey-Doğu">Kuzey-Doğu</option>
+              <option value="Kuzey-Batı">Kuzey-Batı</option>
+              <option value="Güney-Doğu">Güney-Doğu</option>
+              <option value="Güney-Batı">Güney-Batı</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>İl</label>
+            <input type="text" id="lf-city" placeholder="İl">
+          </div>
+          <div class="form-group">
+            <label>İlçe</label>
+            <input type="text" id="lf-district" placeholder="İlçe">
+          </div>
+          <div class="form-group">
+            <label>Mahalle</label>
+            <input type="text" id="lf-neighborhood" placeholder="Mahalle">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Adres</label>
+          <textarea id="lf-address" rows="2" placeholder="Detaylı adres"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Açıklama</label>
+          <textarea id="lf-description" rows="4" placeholder="İlan açıklaması"></textarea>
+        </div>
+        <div class="form-row checkboxes">
+          <label class="checkbox-label"><input type="checkbox" id="lf-balcony"> Balkon</label>
+          <label class="checkbox-label"><input type="checkbox" id="lf-elevator"> Asansör</label>
+          <label class="checkbox-label"><input type="checkbox" id="lf-parking"> Otopark</label>
+          <label class="checkbox-label"><input type="checkbox" id="lf-furnished"> Eşyalı</label>
+          <label class="checkbox-label"><input type="checkbox" id="lf-complex"> Site İçi</label>
+          <label class="checkbox-label"><input type="checkbox" id="lf-swap"> Takas</label>
+          <label class="checkbox-label"><input type="checkbox" id="lf-credit"> Krediye Uygun</label>
+        </div>
+        <div class="form-group">
+          <label>Görseller</label>
+          <div id="lf-images-area" class="images-upload-area">
+            <div id="lf-images-preview" class="images-preview"></div>
+            <button id="btn-add-images" class="btn-small">+ Görsel Ekle</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-listing" class="btn">İptal</button>
+        <button id="btn-save-listing" class="btn btn-primary">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Listing Detail Modal -->
+  <div id="modal-listing-detail" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2 id="detail-title">İlan Detayı</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="detail-body">
+        <!-- Filled by JS -->
+      </div>
+      <div class="modal-footer">
+        <button id="btn-delete-listing" class="btn btn-danger">Sil</button>
+        <button id="btn-edit-listing" class="btn">Düzenle</button>
+        <button id="btn-select-listing" class="btn btn-primary">Bu İlanı Seç</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview & Generate Modal -->
+  <div id="modal-preview" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content modal-preview">
+      <div class="modal-header">
+        <h2>Görsel Önizleme</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="preview-container" class="preview-container">
+          <img id="preview-image" src="" alt="Önizleme">
+        </div>
+        <div id="preview-loading" class="preview-loading hidden">
+          <div class="spinner"></div>
+          <span>Görsel üretiliyor...</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-regenerate" class="btn">Yeniden Üret</button>
+        <button id="btn-download" class="btn btn-primary">İndir</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Generate Button (floating) -->
+  <button id="btn-generate" class="btn-generate hidden" title="Görsel Üret">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+      <circle cx="8.5" cy="8.5" r="1.5"/>
+      <polyline points="21 15 16 10 5 21"/>
+    </svg>
+    <span>Görsel Üret</span>
+  </button>
+
+  <script src="js/html2canvas.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/listing-panel.js"></script>
+  <script src="js/template-panel.js"></script>
+  <script src="js/occasion-panel.js"></script>
+  <script src="js/listing-form.js"></script>
+  <script src="js/settings-modal.js"></script>
+  <script src="js/preview-modal.js"></script>
+  <script src="js/studio.js"></script>
+</body>
+</html>

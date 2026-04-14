@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #1B2A4A;
+    position: relative;
+  }
+
+  /* Subtle gradient overlay */
+  .bg-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at 50% 40%, rgba(197,163,85,0.08) 0%, transparent 60%),
+                linear-gradient(180deg, rgba(27,42,74,0) 0%, rgba(10,18,36,0.5) 100%);
+    z-index: 0;
+  }
+
+  /* Geometric pattern - horizontal lines */
+  .geo-lines {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .geo-line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197,163,85,0.1), transparent);
+  }
+  .geo-line:nth-child(1) { top: 180px; left: 0; width: 100%; }
+  .geo-line:nth-child(2) { top: 360px; left: 0; width: 100%; }
+  .geo-line:nth-child(3) { top: 540px; left: 0; width: 100%; }
+  .geo-line:nth-child(4) { top: 720px; left: 0; width: 100%; }
+  .geo-line:nth-child(5) { top: 900px; left: 0; width: 100%; }
+
+  /* Vertical lines */
+  .geo-vline {
+    position: absolute;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(197,163,85,0.08), transparent);
+    height: 100%;
+    top: 0;
+  }
+  .geo-vline:nth-child(1) { left: 180px; }
+  .geo-vline:nth-child(2) { left: 360px; }
+  .geo-vline:nth-child(3) { left: 540px; }
+  .geo-vline:nth-child(4) { left: 720px; }
+  .geo-vline:nth-child(5) { left: 900px; }
+
+  /* Geometric corner accents */
+  .corner-accent {
+    position: absolute;
+    z-index: 2;
+  }
+  .corner-accent::before, .corner-accent::after {
+    content: '';
+    position: absolute;
+    background: #C5A355;
+  }
+  .corner-tl {
+    top: 50px; left: 50px;
+  }
+  .corner-tl::before { width: 60px; height: 2px; top: 0; left: 0; }
+  .corner-tl::after { width: 2px; height: 60px; top: 0; left: 0; }
+
+  .corner-tr {
+    top: 50px; right: 50px;
+  }
+  .corner-tr::before { width: 60px; height: 2px; top: 0; right: 0; }
+  .corner-tr::after { width: 2px; height: 60px; top: 0; right: 0; }
+
+  .corner-bl {
+    bottom: 50px; left: 50px;
+  }
+  .corner-bl::before { width: 60px; height: 2px; bottom: 0; left: 0; }
+  .corner-bl::after { width: 2px; height: 60px; bottom: 0; left: 0; }
+
+  .corner-br {
+    bottom: 50px; right: 50px;
+  }
+  .corner-br::before { width: 60px; height: 2px; bottom: 0; right: 0; }
+  .corner-br::after { width: 2px; height: 60px; bottom: 0; right: 0; }
+
+  /* Large geometric diamond shape in background */
+  .bg-diamond {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    border: 1px solid rgba(197,163,85,0.08);
+    transform: translate(-50%, -50%) rotate(45deg);
+    z-index: 1;
+  }
+  .bg-diamond::after {
+    content: '';
+    position: absolute;
+    top: 40px; left: 40px; right: 40px; bottom: 40px;
+    border: 1px solid rgba(197,163,85,0.06);
+  }
+
+  /* Chevron accents */
+  .chevron {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-right: 2px solid rgba(197,163,85,0.15);
+    border-bottom: 2px solid rgba(197,163,85,0.15);
+    z-index: 1;
+  }
+  .chevron-1 { top: 200px; right: 100px; transform: rotate(-45deg); }
+  .chevron-2 { top: 230px; right: 130px; transform: rotate(-45deg); opacity: 0.6; }
+  .chevron-3 { bottom: 280px; left: 100px; transform: rotate(135deg); }
+  .chevron-4 { bottom: 310px; left: 130px; transform: rotate(135deg); opacity: 0.6; }
+
+  /* Content */
+  .content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+  }
+
+  /* Logo */
+  .logo-container {
+    position: absolute;
+    top: 55px;
+    left: 0; right: 0;
+    text-align: center;
+  }
+  .logo-container img {
+    height: 65px;
+    object-fit: contain;
+  }
+
+  /* Main message */
+  .message-area {
+    text-align: center;
+    margin-top: -20px;
+  }
+
+  .gold-bar {
+    width: 50px;
+    height: 3px;
+    background: #C5A355;
+    margin: 0 auto 30px;
+  }
+
+  .subtitle-top {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: #C5A355;
+    margin-bottom: 24px;
+  }
+
+  .main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 76px;
+    font-weight: 700;
+    line-height: 1.12;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+  }
+  .main-title span { display: block; }
+
+  .title-accent {
+    font-family: 'Playfair Display', serif;
+    font-size: 76px;
+    font-weight: 700;
+    color: #C5A355;
+  }
+
+  .accent-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .accent-divider .line {
+    width: 60px;
+    height: 1px;
+    background: rgba(197,163,85,0.4);
+  }
+  .accent-divider .diamond {
+    width: 8px;
+    height: 8px;
+    border: 1px solid #C5A355;
+    transform: rotate(45deg);
+  }
+
+  .sub-message {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 55px;
+    left: 0; right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .agent-photo-wrapper {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, #C5A355, #A08A3E, #C5A355);
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid #1B2A4A;
+  }
+
+  .agent-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+  }
+
+  .agent-phone {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-overlay"></div>
+
+  <!-- Geometric elements -->
+  <div class="geo-lines">
+    <div class="geo-line"></div>
+    <div class="geo-line"></div>
+    <div class="geo-line"></div>
+    <div class="geo-line"></div>
+    <div class="geo-line"></div>
+  </div>
+  <div class="geo-vline" style="left:180px"></div>
+  <div class="geo-vline" style="left:360px"></div>
+  <div class="geo-vline" style="left:540px"></div>
+  <div class="geo-vline" style="left:720px"></div>
+  <div class="geo-vline" style="left:900px"></div>
+
+  <div class="bg-diamond"></div>
+
+  <div class="chevron chevron-1"></div>
+  <div class="chevron chevron-2"></div>
+  <div class="chevron chevron-3"></div>
+  <div class="chevron chevron-4"></div>
+
+  <!-- Corner accents -->
+  <div class="corner-accent corner-tl"></div>
+  <div class="corner-accent corner-tr"></div>
+  <div class="corner-accent corner-bl"></div>
+  <div class="corner-accent corner-br"></div>
+
+  <div class="content">
+    <!-- Logo -->
+    <div class="logo-container">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+
+    <!-- Main message -->
+    <div class="message-area">
+      <div class="gold-bar"></div>
+      <div class="subtitle-top">Saygiyla</div>
+      <h1 class="main-title">
+        <span>Babalar G&#252;n&#252;</span>
+        <span class="title-accent">Kutlu Olsun</span>
+      </h1>
+      <div class="accent-divider">
+        <div class="line"></div>
+        <div class="diamond"></div>
+        <div class="line"></div>
+      </div>
+      <p class="sub-message">En degerli varliklara</p>
+    </div>
+  </div>
+
+  <!-- Agent section -->
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-name" data-field="agentName"></div>
+    <div class="agent-phone" data-field="agentPhone"></div>
+  </div>
+</body>
+</html>

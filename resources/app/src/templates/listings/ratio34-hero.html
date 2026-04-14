@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1440px;font-family:'Inter',sans-serif;overflow:hidden;background:#0F1A30;position:relative}
+
+.hero{position:absolute;top:0;left:0;right:0;height:55%;background-size:cover;background-position:center}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,26,48,0.2) 0%,rgba(15,26,48,0) 30%,rgba(15,26,48,0.7) 70%,#0F1A30 100%)}
+
+.top-bar{position:absolute;top:0;left:0;right:0;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;z-index:3}
+.logo{height:48px}
+.badges{display:flex;gap:10px}
+.badge{padding:8px 18px;font-size:12px;font-weight:800;letter-spacing:2px;border-radius:4px}
+.badge-type{background:#C5A355;color:#1B2A4A}
+.badge-prop{background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);color:white}
+
+.content{position:absolute;bottom:0;left:0;right:0;top:42%;padding:0 44px 44px;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;gap:14px}
+
+.gold-accent{width:50px;height:3px;background:linear-gradient(90deg,#C5A355,#D4B76A);border-radius:2px}
+.prop-type{font-size:11px;font-weight:700;color:#C5A355;letter-spacing:3px;text-transform:uppercase}
+.title{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:white;line-height:1.2}
+.location{font-size:14px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:8px}
+.loc-dot{width:6px;height:6px;border-radius:50%;background:#C5A355}
+
+.price-area{margin:6px 0}
+.price{font-size:46px;font-weight:800;color:white;letter-spacing:-1px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0}
+.stat{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px 10px;text-align:center}
+.stat-value{font-size:20px;font-weight:800;color:#C5A355}
+.stat-label{font-size:9px;color:rgba(255,255,255,0.4);margin-top:3px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
+
+.features{display:flex;gap:8px;flex-wrap:wrap}
+.feat{padding:7px 14px;background:rgba(197,163,85,0.08);border:1px solid rgba(197,163,85,0.15);border-radius:20px;font-size:11px;font-weight:600;color:#D4B76A}
+
+.bottom-bar{display:flex;align-items:center;justify-content:space-between;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);margin-top:8px}
+.agent{display:flex;align-items:center;gap:14px}
+.agent-photo{width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid #C5A355}
+.agent-name{font-size:14px;font-weight:700;color:white}
+.agent-phone{font-size:12px;color:#8899AA}
+.agent-label{font-size:9px;color:#C5A355;text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.brand-sm{height:36px}
+</style></head>
+<body>
+  <div class="hero" data-bg="primaryImage"><div class="hero-overlay"></div></div>
+  <div class="top-bar">
+    <img class="logo" data-field="logo" src="">
+    <div class="badges">
+      <div class="badge badge-type" data-field="listingType">SATILIK</div>
+      <div class="badge badge-prop" data-field="propertyType">Daire</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="gold-accent"></div>
+    <div class="title" data-field="title">İlan Başlığı Buraya Gelecek</div>
+    <div class="location"><span class="loc-dot"></span><span data-field="location">Konum bilgisi</span></div>
+    <div class="price-area"><div class="price" data-field="price">0 TL</div></div>
+    <div class="stats">
+      <div class="stat"><div class="stat-value" data-field="roomCount">3+1</div><div class="stat-label">Oda</div></div>
+      <div class="stat"><div class="stat-value" data-field="area">120 m²</div><div class="stat-label">Alan</div></div>
+      <div class="stat"><div class="stat-value" data-field="floor">3</div><div class="stat-label">Kat</div></div>
+      <div class="stat"><div class="stat-value" data-field="buildingAge">0</div><div class="stat-label">Bina Yaşı</div></div>
+    </div>
+    <div class="features" data-features></div>
+    <div class="bottom-bar">
+      <div class="agent">
+        <img class="agent-photo" data-field="agentPhoto" src="">
+        <div>
+          <div class="agent-label">Emlak Danışmanı</div>
+          <div class="agent-name" data-field="agentName">İsim Soyisim</div>
+          <div class="agent-phone" data-field="agentPhone">+90 5XX</div>
+        </div>
+      </div>
+      <img class="brand-sm" data-field="logo" src="">
+    </div>
+  </div>
+</body></html>

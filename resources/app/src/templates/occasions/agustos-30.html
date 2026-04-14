@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #1B2A4A;
+    position: relative;
+  }
+
+  /* Bold red diagonal sweep */
+  .red-sweep {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(155deg, #E30A17 0%, #E30A17 35%, transparent 35.5%);
+    z-index: 1;
+  }
+
+  /* Subtle texture overlay */
+  .texture {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 40%, rgba(0,0,0,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(197,163,85,0.08) 0%, transparent 40%);
+    z-index: 2;
+  }
+
+  /* Turkish flag crescent - large, bold */
+  .flag-crescent {
+    position: absolute;
+    top: 80px;
+    left: 60px;
+    z-index: 3;
+    opacity: 0.2;
+  }
+  .crescent-outer {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    position: relative;
+  }
+  .crescent-inner {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: #E30A17;
+    position: absolute;
+    top: 30px;
+    left: 70px;
+  }
+  .flag-star {
+    position: absolute;
+    top: 100px;
+    left: 210px;
+  }
+  .flag-star::before {
+    content: '';
+    display: block;
+    width: 0; height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 22px solid #FFFFFF;
+  }
+  .flag-star::after {
+    content: '';
+    display: block;
+    width: 0; height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 22px solid #FFFFFF;
+    margin-top: -8px;
+  }
+
+  /* Bold geometric lines */
+  .bold-line {
+    position: absolute;
+    background: rgba(197,163,85,0.25);
+    z-index: 3;
+  }
+  .bl-1 {
+    top: 0;
+    left: 37%;
+    width: 4px;
+    height: 300px;
+    background: linear-gradient(180deg, rgba(197,163,85,0.4), transparent);
+  }
+  .bl-2 {
+    bottom: 200px;
+    right: 100px;
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(197,163,85,0.3));
+  }
+  .bl-3 {
+    bottom: 240px;
+    right: 100px;
+    width: 140px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(197,163,85,0.2));
+  }
+
+  /* Shield / victory shape */
+  .victory-shape {
+    position: absolute;
+    top: 420px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    border: 2px solid rgba(197,163,85,0.15);
+    border-radius: 50%;
+    z-index: 3;
+  }
+  .victory-shape::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border: 1px solid rgba(197,163,85,0.08);
+    border-radius: 50%;
+  }
+
+  .content {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-top {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    z-index: 6;
+  }
+  .logo-top img {
+    height: 65px;
+    object-fit: contain;
+  }
+
+  .date-row {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+  .date-number {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 140px;
+    color: #FFFFFF;
+    line-height: 1;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .date-month {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    color: #C5A355;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+  }
+
+  .gold-divider {
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #C5A355, transparent);
+    margin: 20px 0 25px;
+  }
+
+  .main-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 64px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 1.15;
+    text-shadow: 0 2px 15px rgba(0,0,0,0.3);
+    margin-bottom: 10px;
+  }
+
+  .sub-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 36px;
+    color: #C5A355;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .bottom-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    background: linear-gradient(180deg, transparent 0%, rgba(13,17,30,0.95) 40%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 6;
+  }
+
+  .agent-photo-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #C5A355;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .agent-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .agent-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+  .agent-phone {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #C5A355;
+  }
+  .agent-company {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="red-sweep"></div>
+  <div class="texture"></div>
+
+  <div class="flag-crescent">
+    <div class="crescent-outer">
+      <div class="crescent-inner"></div>
+    </div>
+    <div class="flag-star"></div>
+  </div>
+
+  <div class="bold-line bl-1"></div>
+  <div class="bold-line bl-2"></div>
+  <div class="bold-line bl-3"></div>
+  <div class="victory-shape"></div>
+
+  <div class="content">
+    <div class="logo-top">
+      <img data-field="logo" src="" alt="Logo">
+    </div>
+
+    <div class="date-row">
+      <div class="date-number">30</div>
+      <div class="date-month">Agustos</div>
+    </div>
+
+    <div class="gold-divider"></div>
+
+    <div class="main-title">Zafer<br>Bayrami</div>
+
+    <div class="sub-title">Kutlu Olsun!</div>
+
+    <div class="bottom-text">Zaferin 104. Yili</div>
+  </div>
+
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-info">
+      <div class="agent-name" data-field="agentName">Ad Soyad</div>
+      <div class="agent-phone" data-field="agentPhone">0500 000 00 00</div>
+      <div class="agent-company">Ozgu Invest Gayrimenkul</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1080px;font-family:'Inter',sans-serif;overflow:hidden;position:relative;background:#0F1A30}
+
+.hero{position:absolute;top:0;left:0;width:100%;height:65%;background-size:cover;background-position:center}
+.hero-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(15,26,48,0.1) 0%,rgba(15,26,48,0.85) 100%)}
+
+.badge-container{position:absolute;top:36px;left:36px;display:flex;gap:10px;z-index:2}
+.badge{padding:8px 20px;font-size:14px;font-weight:800;letter-spacing:2px;text-transform:uppercase;border-radius:4px}
+.badge-type{background:#C5A355;color:#1B2A4A}
+.badge-prop{background:rgba(255,255,255,0.2);color:white;backdrop-filter:blur(8px)}
+
+.logo-top{position:absolute;top:36px;right:36px;height:50px;z-index:2}
+
+.content{position:absolute;bottom:0;left:0;right:0;height:45%;padding:40px 44px 36px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(135deg,#1B2A4A 0%,#0F1A30 100%)}
+
+.title-area{}
+.title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:white;line-height:1.2;margin-bottom:8px}
+.location{font-size:14px;color:#C5A355;font-weight:500;letter-spacing:0.5px;display:flex;align-items:center;gap:6px}
+.location::before{content:'';display:inline-block;width:16px;height:2px;background:#C5A355}
+
+.price-row{display:flex;align-items:flex-end;justify-content:space-between;margin:16px 0}
+.price{font-size:40px;font-weight:800;color:white;letter-spacing:-1px}
+.price-currency{font-size:18px;font-weight:400;color:#C5A355;margin-left:8px}
+
+.features{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.feat{padding:6px 14px;background:rgba(197,163,85,0.12);border:1px solid rgba(197,163,85,0.25);border-radius:20px;font-size:12px;font-weight:600;color:#D4B76A}
+
+.bottom-bar{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1)}
+.agent{display:flex;align-items:center;gap:12px}
+.agent-photo{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid #C5A355}
+.agent-info{}
+.agent-name{font-size:14px;font-weight:700;color:white}
+.agent-phone{font-size:12px;color:#8899AA}
+.brand-logo{height:40px}
+</style></head>
+<body>
+  <div class="hero" data-bg="primaryImage">
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="badge-container">
+    <div class="badge badge-type" data-field="listingType">SATILIK</div>
+    <div class="badge badge-prop" data-field="propertyType">Daire</div>
+  </div>
+  <img class="logo-top" data-field="logo" src="">
+
+  <div class="content">
+    <div class="title-area">
+      <div class="title" data-field="title">İlan Başlığı</div>
+      <div class="location" data-field="location">Konum</div>
+    </div>
+
+    <div class="price-row">
+      <div class="price" data-field="price">0 TL</div>
+    </div>
+
+    <div class="features" data-features></div>
+
+    <div class="bottom-bar">
+      <div class="agent">
+        <img class="agent-photo" data-field="agentPhoto" src="">
+        <div class="agent-info">
+          <div class="agent-name" data-field="agentName">İsim Soyisim</div>
+          <div class="agent-phone" data-field="agentPhone">+90 5XX XXX XX XX</div>
+        </div>
+      </div>
+      <img class="brand-logo" data-field="logo" src="">
+    </div>
+  </div>
+</body></html>

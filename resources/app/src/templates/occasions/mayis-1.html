@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #FAFAFA;
+    position: relative;
+  }
+
+  /* Left accent bar */
+  .left-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 100%;
+    background: linear-gradient(180deg, #1B2A4A 0%, #2A3F6B 50%, #1B2A4A 100%);
+    z-index: 2;
+  }
+
+  /* Geometric shapes inside left bar */
+  .bar-circle {
+    position: absolute;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(197,163,85,0.3);
+    z-index: 3;
+  }
+  .bar-circle-1 { top: 200px; }
+  .bar-circle-2 { top: 400px; opacity: 0.5; }
+  .bar-circle-3 { top: 600px; opacity: 0.3; }
+
+  /* Background geometric accents */
+  .geo-block {
+    position: absolute;
+    z-index: 1;
+  }
+  .geo-1 {
+    top: 100px;
+    right: 80px;
+    width: 200px;
+    height: 200px;
+    border: 1px solid rgba(27,42,74,0.06);
+    transform: rotate(45deg);
+  }
+  .geo-2 {
+    bottom: 300px;
+    right: 150px;
+    width: 120px;
+    height: 120px;
+    background: rgba(197,163,85,0.04);
+    transform: rotate(15deg);
+  }
+  .geo-3 {
+    top: 500px;
+    right: 60px;
+    width: 80px;
+    height: 80px;
+    border: 1px solid rgba(227,10,23,0.08);
+    border-radius: 50%;
+  }
+
+  /* Horizontal lines pattern */
+  .h-lines {
+    position: absolute;
+    top: 450px;
+    left: 160px;
+    right: 60px;
+    height: 1px;
+    background: rgba(27,42,74,0.08);
+    z-index: 1;
+  }
+  .h-lines::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(27,42,74,0.05);
+  }
+  .h-lines::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(27,42,74,0.05);
+  }
+
+  .content {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 160px;
+    padding-right: 60px;
+    justify-content: center;
+  }
+
+  .logo-top {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    z-index: 5;
+  }
+  .logo-top img {
+    height: 65px;
+    object-fit: contain;
+  }
+
+  .date-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: #C5A355;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+
+  .big-one {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 180px;
+    color: #1B2A4A;
+    line-height: 0.85;
+    margin-bottom: 0;
+  }
+
+  .mayis-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 60px;
+    color: #E30A17;
+    letter-spacing: 12px;
+    text-transform: uppercase;
+    margin-top: -10px;
+    margin-bottom: 20px;
+  }
+
+  .title-divider {
+    width: 80px;
+    height: 4px;
+    background: #C5A355;
+    margin-bottom: 25px;
+  }
+
+  .main-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 44px;
+    color: #1B2A4A;
+    line-height: 1.25;
+    margin-bottom: 15px;
+  }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: rgba(27,42,74,0.5);
+    line-height: 1.5;
+  }
+
+  /* Red accent dot */
+  .red-dot {
+    position: absolute;
+    left: 140px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #E30A17;
+    border-radius: 50%;
+    z-index: 5;
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    background: linear-gradient(180deg, transparent 0%, #1B2A4A 40%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 6;
+  }
+
+  .agent-photo-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #C5A355;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .agent-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .agent-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+  .agent-phone {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #C5A355;
+  }
+  .agent-company {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="left-bar"></div>
+  <div class="bar-circle bar-circle-1"></div>
+  <div class="bar-circle bar-circle-2"></div>
+  <div class="bar-circle bar-circle-3"></div>
+
+  <div class="geo-block geo-1"></div>
+  <div class="geo-block geo-2"></div>
+  <div class="geo-block geo-3"></div>
+  <div class="h-lines"></div>
+
+  <div class="red-dot"></div>
+
+  <div class="content">
+    <div class="logo-top">
+      <img data-field="logoNavy" src="" alt="Logo">
+    </div>
+
+    <div class="date-label">Emek ve Dayanisma</div>
+    <div class="big-one">1</div>
+    <div class="mayis-text">Mayis</div>
+    <div class="title-divider"></div>
+    <div class="main-title">Emek ve Dayanisma<br>Gunu</div>
+    <div class="subtitle">Emegin ve emekcilin yaniday&#305;z.</div>
+  </div>
+
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-info">
+      <div class="agent-name" data-field="agentName">Ad Soyad</div>
+      <div class="agent-phone" data-field="agentPhone">0500 000 00 00</div>
+      <div class="agent-company">Ozgu Invest Gayrimenkul</div>
+    </div>
+  </div>
+</body>
+</html>

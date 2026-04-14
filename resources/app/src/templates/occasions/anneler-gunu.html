@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(160deg, #FFF5F0 0%, #FDE8E0 30%, #F8D7CF 60%, #F0C4BB 100%);
+    position: relative;
+  }
+
+  /* Soft overlay gradient */
+  .bg-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at 70% 20%, rgba(197,163,85,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(27,42,74,0.06) 0%, transparent 50%);
+    z-index: 0;
+  }
+
+  /* Abstract floral shapes */
+  .flower {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .flower-1 {
+    top: -60px; right: -40px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(197,163,85,0.15) 0%, transparent 70%);
+  }
+  .flower-1::before, .flower-1::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+  }
+  .flower-1::before {
+    width: 140px; height: 200px;
+    background: rgba(197,163,85,0.12);
+    top: 60px; left: 20px;
+    transform: rotate(-30deg);
+  }
+  .flower-1::after {
+    width: 120px; height: 180px;
+    background: rgba(210,130,140,0.15);
+    top: 40px; right: 40px;
+    transform: rotate(20deg);
+  }
+
+  .flower-2 {
+    bottom: 200px; left: -50px;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(210,130,140,0.12) 0%, transparent 70%);
+  }
+  .flower-2::before {
+    content: '';
+    position: absolute;
+    width: 100px; height: 160px;
+    background: rgba(197,163,85,0.1);
+    border-radius: 50%;
+    top: 30px; left: 60px;
+    transform: rotate(40deg);
+  }
+
+  /* Petal cluster top-left */
+  .petal-group {
+    position: absolute;
+    top: 80px; left: 60px;
+    z-index: 1;
+  }
+  .petal {
+    position: absolute;
+    border-radius: 50% 50% 50% 0;
+    opacity: 0.18;
+  }
+  .petal:nth-child(1) {
+    width: 60px; height: 60px;
+    background: #C5A355;
+    transform: rotate(-45deg);
+  }
+  .petal:nth-child(2) {
+    width: 50px; height: 50px;
+    background: #D2828C;
+    left: 30px; top: -20px;
+    transform: rotate(-15deg);
+  }
+  .petal:nth-child(3) {
+    width: 40px; height: 40px;
+    background: #C5A355;
+    left: 60px; top: 10px;
+    transform: rotate(-70deg);
+  }
+
+  /* Right side petals */
+  .petal-right {
+    position: absolute;
+    top: 400px; right: 40px;
+    z-index: 1;
+  }
+  .petal-right .petal:nth-child(1) {
+    width: 70px; height: 70px;
+    background: #D2828C;
+    transform: rotate(30deg);
+    opacity: 0.14;
+  }
+  .petal-right .petal:nth-child(2) {
+    width: 55px; height: 55px;
+    background: #C5A355;
+    left: -30px; top: 40px;
+    transform: rotate(60deg);
+    opacity: 0.12;
+  }
+
+  /* Gold line accents */
+  .gold-line {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, rgba(197,163,85,0.3), transparent);
+    height: 1px;
+    z-index: 1;
+  }
+  .gold-line-1 { top: 300px; left: 100px; width: 400px; transform: rotate(-5deg); }
+  .gold-line-2 { top: 720px; right: 80px; width: 350px; transform: rotate(3deg); }
+
+  /* Content container */
+  .content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+  }
+
+  /* Logo */
+  .logo-container {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  .logo-container img {
+    height: 70px;
+    object-fit: contain;
+  }
+
+  /* Main message area */
+  .message-area {
+    text-align: center;
+    margin-top: -40px;
+  }
+
+  .subtitle-top {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #C5A355;
+    margin-bottom: 20px;
+  }
+
+  .main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #1B2A4A;
+    margin-bottom: 16px;
+  }
+
+  .main-title span {
+    display: block;
+  }
+
+  .accent-line {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #C5A355, transparent);
+    margin: 24px auto;
+  }
+
+  .sub-message {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 26px;
+    color: #1B2A4A;
+    opacity: 0.7;
+    margin-top: 8px;
+  }
+
+  /* Decorative diamond */
+  .diamond {
+    width: 12px;
+    height: 12px;
+    background: #C5A355;
+    transform: rotate(45deg);
+    margin: 20px auto;
+    opacity: 0.5;
+  }
+
+  /* Agent section */
+  .agent-section {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .agent-photo-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, #C5A355, #E8D5A0, #C5A355);
+  }
+
+  .agent-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid #FFF5F0;
+  }
+
+  .agent-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1B2A4A;
+    letter-spacing: 1px;
+  }
+
+  .agent-phone {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #1B2A4A;
+    opacity: 0.65;
+    letter-spacing: 0.5px;
+  }
+
+  /* Bottom decorative dots */
+  .dot-row {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 1;
+  }
+  .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #C5A355;
+    opacity: 0.3;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-overlay"></div>
+
+  <!-- Floral decorations -->
+  <div class="flower flower-1"></div>
+  <div class="flower flower-2"></div>
+  <div class="petal-group">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+  </div>
+  <div class="petal-right">
+    <div class="petal"></div>
+    <div class="petal"></div>
+  </div>
+  <div class="gold-line gold-line-1"></div>
+  <div class="gold-line gold-line-2"></div>
+
+  <div class="content">
+    <!-- Logo -->
+    <div class="logo-container">
+      <img data-field="logoNavy" src="" alt="Logo">
+    </div>
+
+    <!-- Main message -->
+    <div class="message-area">
+      <div class="subtitle-top">Her Zaman Yaninizdayiz</div>
+      <h1 class="main-title">
+        <span>Anneler G&#252;n&#252;</span>
+        <span>Kutlu Olsun</span>
+      </h1>
+      <div class="accent-line"></div>
+      <div class="diamond"></div>
+      <p class="sub-message">Sevgi dolu bir g&#252;n dileriz</p>
+    </div>
+  </div>
+
+  <div class="dot-row">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <!-- Agent section -->
+  <div class="agent-section">
+    <div class="agent-photo-wrapper">
+      <img data-field="agentPhoto" src="" alt="Agent">
+    </div>
+    <div class="agent-name" data-field="agentName"></div>
+    <div class="agent-phone" data-field="agentPhone"></div>
+  </div>
+</body>
+</html>
